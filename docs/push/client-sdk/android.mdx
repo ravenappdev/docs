@@ -1,0 +1,92 @@
+---
+title: "Android SDK"
+description: "The Raven Android SDK allows you to -"
+---
+
+1. Manage (Create/Update) your users and their preferences on Raven.
+2. Manage Push tokens on Raven.
+
+### Setup
+
+This setup helps you to set user and manage tokens on Raven. It assumes you
+already have setup Firebase and are handling the rendering of notifications
+yourself. Also, you must setup a Firebase Integration on the console and create
+an event with a Push template as defined [here](/push/push-template). Once done,
+please follow the below steps
+
+1. Setup Firebase
+
+   - [Create](https://firebase.google.com/docs/cloud-messaging/android/client#create_a_firebase_project)
+     your Firebase project.
+   - [Register](https://firebase.google.com/docs/cloud-messaging/android/client#register_your_app_with_firebase)
+     your app with Firebase.
+   - [Add](https://firebase.google.com/docs/cloud-messaging/android/client#add_a_firebase_configuration_file)
+     a Firebase configuration file.
+
+2. Add the following in your project gradle:
+
+```json
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+3. Add the following library in your app gradle. Please check the latest version
+   [here](https://jitpack.io/#ravenappdev/raven-fcm-util).
+
+```javascript
+implementation 'com.github.ravenappdev:raven-android-sdk:1.0.6'
+```
+
+4. Initialize the SDK in Application onCreate.
+
+```javascript
+RavenSdk.initialize(this, YOUR_APP_ID, YOUR_ACCOUNT_API_KEY);
+```
+
+5. Set user on signup/login. You can use any of the following methods to set
+   user. Note that this will create a user if it does not exists in Raven. If it
+   exists, it will simply update the user if there is any change.
+
+```javascript
+RavenSdk.setUserMobile(USER_ID, MOBILE);
+RavenSdk.setUserEmail(USER_ID, EMAIL);
+RavenSdk.setUser(USER_ID, MOBILE, EMAIL);
+```
+
+6. Set the Firebase device token on Raven.
+
+```javascript
+RavenSdk.setDeviceToken(TOKEN);
+```
+
+7. When you receive a message from Firebase in the `onMessageReceived` callback,
+   please update Raven with DELIVERED status. If you have set up Notification
+   click and dismiss receivers, please update Raven with CLICKED and DISMISSED
+   statuses respectively. This method takes the Raven `notificationId` as an
+   argument. Raven generates a unique notification id and attaches it in the
+   data payload.
+
+```javascript
+val notificationId = remoteMessage.data["raven_notification_id"]
+
+//When notification is delivered
+RavenSdk.updateStatus(notificationId, Status.DELIVERED)
+
+//When notification is clicked
+RavenSdk.updateStatus(notificationId, Status.CLICKED)
+
+//When notification is dismissed
+RavenSdk.updateStatus(notificationId, Status.DISMISSED)
+```
+
+7. When the user logs out of your app, we need to de-register the device token.
+   Call `logout` to logout the user from Raven.
+
+```javascript
+RavenSdk.logout();
+```

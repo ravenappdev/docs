@@ -1,0 +1,50 @@
+---
+title: "Telegram Template"
+---
+
+## 📜 Template
+
+You can create the template while creating an Event with Slack channel enabled.
+You can easily create/update the template content by editing the event.
+
+Raven currently supports sending text messages through Telegram.
+
+Here's how you can add a telegram text message in the template section of the
+Event.
+
+![Telegram Text Message](/images/telegram-text-message.png)
+
+### Dynamic Content
+
+To pass dynamic or custom data in the template like invoice number, user name,
+tracking link etc., you should wrap it within handlebars `{{ user_name }}` .
+Raven uses [Handlebars.js](https://handlebarsjs.com/guide/#what-is-handlebars)
+to parse the template and all handlebar operations are supported. Following
+Handlebars expressions are supported within templates:
+
+1. Nested objects
+2. #if, #each, #with
+
+You will need to pass the value of the variables in the data object of
+[Send Event API](/api-reference/send-event).
+
+**Example**
+
+```javascript Slack Template
+Hey {{user_name}}, Thank you for your Order Id# {{order.id}} of amount {{order.amount}}.
+{{#if premium}} Glad to have you as our Premium customer. {{/if}}
+```
+
+`data` object in API:
+
+```json
+...,
+"data": {
+    "user_name": "Joe",
+    "order": {
+        "id": 123,
+        "amount": 745
+    },
+    "premium": true
+}
+```

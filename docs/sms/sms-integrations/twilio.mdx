@@ -1,0 +1,48 @@
+---
+title: "Twilio"
+description: "Guide on how to add Twilio SMS Integration."
+---
+
+### Step 1. Account Setup
+
+If you do not have an account with Twilio yet, create an account
+[here](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account).
+The setup will also guide you to get a phone number to send SMS.
+
+### Step 2. MSG91 Integration in Raven
+
+| Keys       | Details                                                                                                                                                                                                       |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Account`  | Twilio Account SID. You can find it [here](https://www.twilio.com/login?g=%2Fconsole%3F&t=2b1c98334b25c1a785ef15b6556396290e3c704a9b57fc40687cbccd79c46a8c).                                                  |
+| `Auth Key` | Twilio Account Token. You can find it [here](https://www.twilio.com/login?g=%2Fconsole%3F&t=2b1c98334b25c1a785ef15b6556396290e3c704a9b57fc40687cbccd79c46a8c).                                                |
+| `From`     | This must be a Twilio phone number that you own. Create one [here](https://www.twilio.com/login?g=%2Fconsole%2Fphone-numbers%2Fsearch%3F&t=a3134facff1edad5ee8c40d35c3a85606f3a8f8a2dfeb64c6f4aedcf3f06da20). |
+
+---
+
+### Step 3. Delivery Reports
+
+There is no additional configuration required to setup delivery reports. Raven
+manages the delivery callback internally for Twilio.
+
+## Advanced
+
+**Send additional parameters to Twilio**
+
+Raven sends the fields present in the SMS template to Twilio by default. To send
+additional fields, please check our [Override doc](/sms/sms-template).
+
+**IP Whitelisting**
+
+You can control access by specifying Raven's IP address, or make sure Raven's IP
+addresses are whitelisted and not blocked.
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## Links
+
+- [Twilio Website](https://www.twilio.com/)
+- [Twilio SMS Documentation](https://www.twilio.com/docs/sms/send-messages)
+- [Twilio Console](https://www.twilio.com/login?g=%2Fconsole%3F&t=2b1c98334b25c1a785ef15b6556396290e3c704a9b57fc40687cbccd79c46a8c)​
+
+​<Info> If you are facing issues with this integration or find something
+missing, please write to us at support@ravenapp.dev </Info>

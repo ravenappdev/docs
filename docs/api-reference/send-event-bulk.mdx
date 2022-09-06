@@ -1,0 +1,132 @@
+---
+title: "Send Event Bulk"
+api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/bulk_send"
+---
+
+### Parameters
+
+<Param path="app_id" type="string" required>
+
+The `id` of the app
+
+</Param>
+
+<RequestExample>
+
+```json Request Example
+POST /v1/apps/{{app_id}}/events/bulk_send HTTP/1.1
+Host: https://api.ravenapp.dev
+Authorization: AuthKey {{secret_key}}
+Content-Type: application/json
+
+{
+    "event": "sample_event_1",
+    "batch": [
+        {
+            "user": {
+                "mobile": "+919876543210",
+                "email": "x@ravenapp.dev",
+                "whatsapp_mobile": "+919876543210", // if empty, `mobile` is considered for whatsapp
+            },
+            "data": {
+                "name": "John Doe",
+	        "date": "01 December 2020"
+            }
+        },
+        {
+            "user": {
+                "mobile": "+919876543210",
+                "email": "x@ravenapp.dev",
+                "whatsapp_mobile": "+919876543210", // if empty, `mobile` is considered for whatsapp
+            },
+            "data": {
+                "name": "John Doe",
+	        "date": "01 December 2020"
+            }
+        }
+    ]
+}
+```
+
+</RequestExample>
+
+## Advanced
+
+### Extra Parameters
+
+If you have any extra parameters that need to be passed in the notification, you
+can add it in the override object in the request payload.
+
+Here's an example payload where we add extra params - email recipients (cc, bcc)
+& override the from parameter.
+
+```json Extra Parameters Example Request
+{
+  "event": "sample_event_1",
+  "user": {
+    "mobile": "+919876543210",
+    "email": "x@ravenapp.dev",
+    "whatsapp_mobile": "+919876543210" // if empty, `mobile` is considered for whatsapp
+  },
+  "data": {
+    "name": "John Doe",
+    "date": "01 December 2020"
+  },
+  "override": {
+    "email": {
+      "from": {
+        // overriding `from`
+        "name": "Adam",
+        "address": "adam@ravenapp.dev"
+      },
+      "cc": [
+        {
+          "name": "Michael",
+          "address": "michael@ravenapp.dev"
+        }
+      ],
+      "bcc": [
+        {
+          "name": "Max",
+          "address": "max@ravenapp.dev"
+        }
+      ]
+    }
+  }
+}
+```
+
+### Provider override
+
+You can also override API payload being sent to the provider. Parameter passed
+in override will be merged with the final API call made to the provider.
+Currently overriding API payload has been enabled for Push Channel. Here's an
+example where we override API payload of Onesignal provider onesignal_test and
+pass additional parameters - big_picture & android_channel_id
+
+```json Provider Override Example Request
+
+{
+    "event": "sample_event_1",
+    "user": {
+        "mobile": "+919876543210",
+        "onesignal_external_id" : "john123"
+    },
+    "data": {
+        "name": "John Doe",
+        "date": "01 December 2020"
+    },
+    "override" : {
+       "providers" : {
+          "onesignal_test" : {   // provider_name
+              "payload" : {
+                 "big_picture" : "<url>",
+                 "android_channel_id" : "<channel_uuid>"
+                 ....
+              }
+          }
+        }
+    }
+}
+
+```

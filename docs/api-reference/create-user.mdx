@@ -1,0 +1,56 @@
+---
+title: "Create User"
+description: "Creates an AppUser if doesn't exist already, or updates user properties"
+api: "POST https://api.ravenapp.dev/v1/apps/:app_id/users"
+---
+
+### Parameters
+
+<Param path="app_id" type="string" required>
+
+The `id` of the app
+
+</Param>
+
+### Body
+
+<Param path="user_id" type="string" required>
+
+your user identifier. if user_id already exists, user properties will be updated else a new user will be created
+
+</Param>
+
+<Param body="email" type="string">
+
+User's email
+
+</Param>
+
+<Param body="mobile" type="string">
+
+mobile with country code prefix (e.g +91)
+
+</Param>
+
+<Param body="whatsapp_mobile" type="string">
+
+Mobile with country code prefix (e.g +91)
+
+</Param>
+
+<RequestExample>
+
+```json Request Example
+POST /v1/apps/{{app_id}}/users HTTP/1.1
+Host: https://api.ravenapp.dev
+Authorization: AuthKey {{secret_key}}
+Content-Type: application/json
+
+{
+    "user_id" : "test",
+    "mobile" : "9876543210",
+    "email" : "x@ravenapp.dev"
+}
+```
+
+</RequestExample>

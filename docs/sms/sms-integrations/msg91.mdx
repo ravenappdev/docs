@@ -1,0 +1,68 @@
+---
+title: "MSG91"
+description: "Guide on how to add MSG91 SMS Integration."
+---
+
+### Step 1. Account Setup
+
+If you do not have an account with MSG91 yet, create an account
+[here](https://msg91.com/). You would need to get your MSG91 approved before
+starting to send SMS. Follow the doc
+[here](https://help.msg91.com/article/359-my-account-status-is-in-demo-what-can-i-do-to-make-my-account-live)
+to get the account approved.
+
+<Note>
+
+If you are sending SMSs in India, TRAI has mandated to register their business,
+headers (sender IDs), and templates on any of the DLT platforms. Follow the
+guide [here](https://www.textlocal.in/tcccpr-trai-dlt-registration/) to get the
+setup done.
+
+</Note>
+
+### Step 2. MSG91 Integration in Raven
+
+| Keys            | Details                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Auth Key`      | Auth key for your account. You can find your Auth Key [here](https://msg91.com/help/where-can-i-find-my-authentication-key).                                                                                                                                                                                                                                                                                                            |
+| `Sender`        | Sender id to be sent with the SMS. Follow the steps [here](https://msg91.com/help/what-is-a-sender-id) to get your Sender ID                                                                                                                                                                                                                                                                                                            |
+| `Route`         | Applicable only for SMSes sent by Indian businesses to Indian destination numbers. Use the route type specified when registering your templates. Possible values: Transactional, OTP, Promotional.                                                                                                                                                                                                                                      |
+| `DLT Entity ID` | Applicable only for SMS sent by Indian businesses to Indian destination numbers. Your Entity Id as registered on DLT (Distributed Ledger Technology) portal of operators in India. This is mandatory to be passed in API or configured on Dashboard for SMSes towards Indian destination [here](https://support.exotel.com/support/solutions/articles/3000096504-trai-regulations-on-commercial-communications-dlt-portal-sms-in-india) |
+
+---
+
+### Step 3. Delivery Reports
+
+Follow the steps to setup delivery reports:
+
+1. On the Raven dashboard, once you successfully add the MSG91 Integration, you
+   will see it in the "Live" tab. Go to the Live tab, and click on MSG91 SMS.
+   You will see a URL as Status Webhook, present in the integration. Copy this
+   URL.
+2. [Log in](https://control.msg91.com)
+3. Open Webhooks option given under SMS API.
+4. Paste the Status Webhook URL copied in Step 1, in the box given and click on
+   Save.
+
+## Advanced
+
+**Send additional parameters to MSG91**
+
+Raven sends the fields present in the SMS template to MSG91 by default. To send
+additional fields, please check our [Override doc](/sms/sms-template).
+
+**IP Whitelisting**
+
+You can control access by specifying Raven's IP address, or make sure Raven's IP
+addresses are whitelisted and not blocked.
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## Links
+
+- [MSG91 Website](https://msg91.com/)
+- [MSG91 SMS Documentation](https://api.msg91.com/apidoc/textsms/send-sms-v1.php)
+- [MSG91 Console](https://control.msg91.com/signin/)​
+
+​<Info> If you are facing issues with this integration or find something
+missing, please write to us at support@ravenapp.dev </Info>

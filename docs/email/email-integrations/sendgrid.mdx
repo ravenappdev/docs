@@ -1,0 +1,70 @@
+---
+title: "SendGrid"
+description: "Guide on how to add SendGrid Email Integration"
+---
+
+### Step 1. Account Setup
+
+- If you do not have an account with SendGrid yet, create an account
+  [here](https://signup.sendgrid.com/).
+
+- Next you need to verify your domain. To create and verify a domain, please
+  follow the SendGrid guide
+  [here](https://docs.sendgrid.com/ui/account-and-settings/how-to-set-up-domain-authentication).
+  In the [free plan](https://sendgrid.com/free/) you can send upto 100
+  emails/day for free.
+
+Step 2. AWS SES Integration in Raven
+
+| Keys               | Details                                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `From Address`     | Your verified "From" email address                                                                                    |
+| `From Name`        | "From Name" of your emails. You can also pass this in the Send Event API. Check the Advanced section below.           |
+| `API Key`          | Your SendGrid API Key. To get your API key, check [here](https://docs.sendgrid.com/ui/account-and-settings/api-keys). |
+| `Reply to Address` | Reply email address. You can also pass this in the Send Event API. Check the Advanced section below.                  |
+
+<Info>
+  We currently only support sending emails via the SendGrid REST API and not the
+  SMTP interface.
+</Info>
+
+### Step 3. Delivery Reports
+
+Follow the steps to setup delivery reports:
+
+1. On the Raven dashboard, once you successfully add the SendGrid Integration,
+   you will see it in the "Live" tab. Go to the Live tab, and click on SendGrid
+   Email. You will see a URL as **Status Webhook**, present in the integration.
+   Copy this URL.
+2. Login to SendGrid and go to Settings > Mail Settings. Create an Event
+   Webhook. Follow the steps mentioned
+   [here](https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook).
+3. Paste the Status Webhook URL copied in Step 1.
+
+## 💫 Advanced
+
+**Send additional parameters to SendGrid**
+
+Raven will send the fields present in the Email template to SendGrid by default.
+Additionally, you can send "cc", "bcc", "From Name", "Reply-to" fields in the
+Send Event API. This will override the fields added in the Integration. Please
+check our Override doc here.
+
+**IP Whitelisting**
+
+You can control access to SendGrid by specifying Raven's IP address, or make
+sure Raven's IP addresses are not blocked. Please follow the SendGrid guide
+[here](https://docs.sendgrid.com/ui/account-and-settings/ip-access-management).
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## 🔗 Links
+
+- [SendGrid Website​](https://sendgrid.com/)
+- [SendGrid Documentation​](https://docs.sendgrid.com/for-developers)
+- [SendGrid Console](https://app.sendgrid.com/login?redirect_to=%2F)
+
+<Info>
+  If you are facing issues with this integration or find something missing,
+  please write to us at [support@ravenapp.dev](mailto:support@ravenapp.dev).
+</Info>

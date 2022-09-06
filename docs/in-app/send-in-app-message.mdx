@@ -1,0 +1,125 @@
+---
+title: "Send an In-App message"
+---
+
+## 💬 Steps to send In-App notifications
+
+### Step 1. Raven Account Setup
+
+If you have not signed up on Raven yet, please
+[sign up for free](https://console.ravenapp.dev/get-started).
+
+You can either use the default App (<your-account-name_test>) created on sign up
+or create a new one by going to the
+[Settings tab](https://console.ravenapp.dev/get-started) in the dashboard. To
+know more please check our [platform doc on Apps](/platform/apps/apps). Collect
+your [credentials](/introduction#credentials) (API Key and App ID) as you will
+need them in the API to trigger notifications.
+
+### Step 2. Add an In-App Integration
+
+Head over to [Integrations tab](https://console.ravenapp.dev/get-started) in the
+dashboard and select In-App. You will see a list of available In-App
+integrations.
+
+Once you have added your Integration, you will be able to view it in the Live
+tab on the dashboard. You can always add/remove/update any integration without
+having to manage any code.
+
+If you do not see the Integration you are looking for, please email us at
+[support@ravenapp.dev](mailto:support@ravenapp.dev), and we will add it to the
+list.
+
+### Step 3. Create an Event
+
+Events define - which notifications to send, what should the content be and how
+to send them. You can manage all this directly from the dashboard without having
+to write a single line of code. Check our platform doc on
+[Events](platform/events/events) for more details.
+
+![Event with In-App](/images/event-in-app.gif)
+
+We first create an event with In-App enabled. In this event, we will add the
+message content and select the integration to send this notification with (the
+integration we added in the previous step). Head over to
+[Events tab](https://console.ravenapp.dev/get-started) in the dashboard and
+click on the Create Event button.
+
+1. Give a unique name to this event. This name will be used to trigger the event
+   in the Send Event API.
+2. Select In-App as a channel to send notifications. Also, select the
+   Integration that you added earlier in Step 2.
+3. Create the notification template. You can add dynamic text to the template
+   like user name, invoice number, order id etc., with the handlebar notation,
+   like this `{{user_name}}`. For more details on templates, languages etc,
+   please check our In-App Template doc.
+
+Your event is created! You will be able to see it in the Events list now.
+
+### Step 3. Setup the SDK in your app
+
+If you are using Raven In-App SDK then make sure to follow the setup steps as
+mentioned [here](in-app/in-app-integrations/raven).
+
+### Step 3. Trigger the Event
+
+Now we just need to test if our setup works. Trigger the event that you created
+above. You can either do this from the dashboard itself (Go to Events tab >
+Click on View Event Button (Eye) > Dialog opens > Click on Test Event). The
+other way is to hit the API directly with cURL or Postman. Below is how the API
+will look like -
+
+```bash Terminal
+curl --location \
+--request POST 'https://api.ravenapp.dev/v1/apps/<YOUR_APP_ID>/events/send' \
+--header 'Authorization: AuthKey <YOUR_API_KEY>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "event": <YOUR_EVENT_NAME>,
+    "user": {
+        "user_id": "<USER_ID>"
+    },
+    "data": {
+        "user_name": "John Doe"
+    }
+}'
+```
+
+|                   |                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| `YOUR_APP_ID`     | App ID of the currently selected App. Go to Settings > App in the dashboard to view.                         |
+| `YOUR_API_KEY`    | The Account API Key. Go to Settings > Account in the dashboard to view.                                      |
+| `YOUR_EVENT_NAME` | Name of the Event we created above in Step 2.                                                                |
+| `USER_ID`         | Unique user identifier to whom you have to send the notification.                                            |
+| `data`            | The data object contains "key": "value" pairs of any dynamic text that you would have added in the template. |
+
+---
+
+Copy the cURL request and simply hit enter in your terminal.
+
+<Check>
+  Great! You should have received an in-app notification successfully. 👍
+</Check>
+
+### Step 4. Verify in Logs
+
+As a final step, we can verify if everything went well and the notification was
+sent. Raven provides a single view of all logs across all channels. You can view
+the request payload, the response and the status of the notification sent. You
+can check our platform doc on [Logs & Metrics](/platform/logs-and-metric) for
+more details.
+
+Head over to [Logs tab](https://console.ravenapp.dev/get-started) in the
+dashboard and click on View icon of the first log entry. You will be able to see
+the details of the payload and the status of the notification that you sent.
+
+![Event Timeline](/images/event-timeline.png)
+
+<Check>
+
+If you were able to successfully receive the notification, you are all set! 👍
+
+If you are facing any issues, please email us on
+[support@ravenapp.dev](mailto:support@ravenapp.dev)
+
+</Check>

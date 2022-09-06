@@ -1,0 +1,47 @@
+---
+title: "Pivlo"
+description: "Guide on how to add Pivlo SMS Integration."
+---
+
+### Step 1. Account Setup
+
+If you do not have an account with MSG91 yet, create an account
+[here](https://console.plivo.com/accounts/register/).
+
+### Step 2. MSG91 Integration in Raven
+
+| Keys       | Details                                                                                                                                                      |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Auth Key` | Plivo Auth Token. You can find it on the home screen of your [Pivlo Console](https://console.plivo.com/accounts/login/?next=/dashboard/).                    |
+| `Auth ID`  | Plivo Auth ID. You can find it on the home screen of your [Pivlo Console](https://console.plivo.com/accounts/login/?next=/dashboard/).                       |
+| `Sender`   | Sender ID to be sent with the SMS. Follow the steps [here](https://support.plivo.com/hc/en-us/articles/360048268191--FAQ-on-Sender-ID) to get your Sender ID |
+
+---
+
+### Step 3. Delivery Reports
+
+There is no additional configuration required to setup delivery reports. Raven
+manages the delivery callback internally for Plivo.
+
+## Advanced
+
+**Send additional parameters to Plivo**
+
+Raven sends the fields present in the SMS template to Plivo by default. To send
+additional fields, please check our [Override doc](/sms/sms-template).
+
+**IP Whitelisting**
+
+You can control access by specifying Raven's IP address, or make sure Raven's IP
+addresses are whitelisted and not blocked.
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## Links
+
+- [Plivo Website](https://www.plivo.com/)
+- [Plivo SMS Documentation](https://www.plivo.com/docs/sms/api/message/)
+- [Plivo Console](https://console.plivo.com/accounts/login/)​
+
+​<Info> If you are facing issues with this integration or find something
+missing, please write to us at support@ravenapp.dev </Info>

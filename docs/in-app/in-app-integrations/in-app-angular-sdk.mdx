@@ -1,0 +1,70 @@
+---
+title: "In-App Angular SDK"
+---
+
+### Step 1.
+
+Run the following commands in the project root directory :
+
+```bash Terminal
+npm i @ravenapp/raven-inapp-angular
+```
+
+### Step 2.
+
+Import `RavenInAppModule` from `@ravenapp/raven-inapp-angular` and add it to the
+imports array in the `app.module.ts` file. import { NgModule } from
+'@angular/core'; import { BrowserModule } from '@angular/platform-browser'; ​
+
+```javascript
+import { AppComponent } from "./app.component";
+import { RavenInAppModule } from "@ravenapp/raven-inapp-angular";
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, RavenInAppModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+### Step 3.
+
+Please refer to the below code to add the notification component in the app -
+
+```javascript
+<raven-inapp-angular
+      [color]="<color>"
+      [indicatorType]="<indicator_type>"
+      [fontStyle]="<fontStyle>"
+      [userId]="<user_id>"
+      [appId]="<app_id>"
+      [signature]="<signature>"
+      [displayStyle]="<displayStyle>"
+      [position]="<position>"
+      [onClickNotification]="<callbackFunction_reference>"
+    >
+</raven-inapp-angular>
+```
+
+| Attribute             | Purpose                                                                                                                                                                                                                                                                                                                              | Examples                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `userId`              | Unique identifier of the user opening the notification center                                                                                                                                                                                                                                                                        |                                                 |
+| `appId`               | Raven App ID. Go to Raven dashboard > Settings > AppID                                                                                                                                                                                                                                                                               |                                                 |
+| `signature`           | Unique signature generated for the user as described ​                                                                                                                                                                                                                                                                               |                                                 |
+| `onClickNotification` | Method that handles notification click. Args: `(clickAction, customData)`. ClickAction string and CustomData map will be provided in the template and passed to the handler. Use clickAction to identify what action to perform on click and customData to pass any additional data that might be useful to perfor the click action. |                                                 |
+| `color`               | This is your primary color. It will get applied to the buttons and other UI components in the inapp center                                                                                                                                                                                                                           | 'red', '#FF0000', 'rgb(255,0,0)' (only strings) |
+| `indicatorType`       | This attribute accepts only two values i.e 'dot', 'count'. The 'dot' will show a dot on the bell icon whenever a new notifications comes and the 'count' will show the count of new notifications.                                                                                                                                   | 'dot', 'count' (only strings)                   |
+| `fontStyle`           | Custom font family for the inapp center. Default will take your system font.                                                                                                                                                                                                                                                         | 'Times', 'Courier' etc (only strings)           |
+| `displayStyle`        | displayStyle accepts two values, i.e 'drawer' and 'bubble'. Bubble displays the notification list inside a popover. Drawer displays the notification list as full height on the right or left side of the screen depending on the position value.                                                                                    | 'drawer', 'bubble' (only strings)               |
+| `position`            | If the displayStyle is 'drawer' then position accepts two values, i.e 'left' and 'right'. If the display style is 'bubble' then position accepts three values, i.e 'left', 'center' and 'right'.                                                                                                                                     | 'left', 'right', 'center' (only strings)        |
+
+<Note>
+  userId, appId and signature are the compulsory attributes, remaining are
+  optional.
+</Note>
+
+### Demo
+
+Our In-app angular demo app shows how to setup the SDK in detail. Please check
+the [demo app](https://github.com/ravenappdev/inapp-angular-demo).

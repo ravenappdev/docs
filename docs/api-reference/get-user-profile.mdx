@@ -1,0 +1,55 @@
+---
+title: "Get User Profile"
+description: "Gets the requested user profile"
+api: "GET https://api.ravenapp.dev/v1/apps/{app_id}/users/{user_id}"
+---
+
+### Parameters
+
+<Param path="app_id" type="string" required>
+
+Your AppId
+
+</Param>
+
+<Param path="user_id" type="string" required>
+
+Your user identifier
+
+</Param>
+
+<RequestExample>
+
+```json Request Example
+GET /v1/apps/{{app_id}}/users/{{user_id}} HTTP/1.1
+Host: https://api.ravenapp.dev
+Authorization: AuthKey {{secret_key}}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200 Response Example
+{
+  "user_sid": "7cf620d5-8a7d-42d0-aceb-8f51eabddb05",
+  "user_id": "john",
+  "mobile": "+919876543210",
+  "email": "s@ravenapp.dev",
+  "whatsapp_mobile": "+919876543210",
+  "devices": [
+    {
+      "created_at": 1613473378532,
+      "updated_at": 1613473378532,
+      "platform": "android",
+      "fcm_token": "asidjaoijddoijqdoiqsjwodjqwodjioqjdijoqdj",
+      "device_sid": "02b5a1ee-40a2-4a08-ad92-d6b508cf9819",
+      "notifications_disabled": false
+    }
+  ],
+  "created_at": 1612976050750,
+  "updated_at": 1616611446951
+}
+```
+
+</ResponseExample>

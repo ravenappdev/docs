@@ -1,0 +1,62 @@
+---
+title: "Exotel"
+description: "Guide on how to add Exotel SMS Integration."
+---
+
+### Step 1. Account Setup
+
+If you do not have an account with Exotel yet, follow the steps
+[here](https://support.exotel.com/support/solutions/articles/105436-what-is-the-registration-process-).
+Once you have registered yourself on DLT and created an Exotel account, you can
+then add Exotel Integration in Raven.
+
+<Note>
+  If you are sending SMSs in India, TRAI has mandated to register their
+  business, headers (sender IDs), and templates on any of the DLT platforms.
+</Note>
+
+### Step 2. Exotel Integration in Raven
+
+| Keys            | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `API Key`       | API Key (username). Find your API credentials [here](https://support.exotel.com/support/solutions/articles/3000023019-how-to-find-my-api-key-api-token-account-sid-and-subdomain-).                                                                                                                                                                                                                                                                        |
+| `API Token`     | API Token (password). Find your API credentials [here](https://support.exotel.com/support/solutions/articles/3000023019-how-to-find-my-api-key-api-token-account-sid-and-subdomain-).                                                                                                                                                                                                                                                                      |
+| `Sender`        | On the Exotel dashboard, navigate to Account > Settings > SMS Sender IDs. Specify one of your ExoPhone or Sender ID (header) linked to it. ExoPhone: From = '080XXXXXX' Transactional Sender ID: From = 'EXOTEL' (If linked to your ExoPhone) Promotional Numeric Sender ID: From = '600XXX' (If linked to your ExoPhone) To view or configure your Sender IDs, refer . The Sender ID should be linked with the SMS template as registered on DLT portal.  |
+| `Account SID`   | Account SID. Find your API credentials [here](https://support.exotel.com/support/solutions/articles/3000023019-how-to-find-my-api-key-api-token-account-sid-and-subdomain-).                                                                                                                                                                                                                                                                               |
+| `Region`        | Default is Singapore. If the Exotel Account URL is my.in.exotel.com then select India. More details [here](https://support.exotel.com/support/solutions/articles/126794-how-to-choose-an-sms-sender-id-).                                                                                                                                                                                                                                                  |
+| `Route`         | Applicable only for SMSes sent by Indian businesses to Indian destination numbers. Use the route type specified when registering your templates. Possible values: Transactional, OTP, Promotional.                                                                                                                                                                                                                                                         |
+| `DLT Entity ID` | Applicable only for SMS sent by Indian businesses to Indian destination numbers. Your Entity Id as registered on DLT (Distributed Ledger Technology) portal of operators in India. This is mandatory to be passed in API or configured on Dashboard for SMSes towards Indian destination ([Learn more about DLT](https://support.exotel.com/support/solutions/articles/3000096504-trai-regulations-on-commercial-communications-dlt-portal-sms-in-india)). |
+
+---
+
+### Step 3. Delivery Reports
+
+There is no additional configuration required to setup delivery reports. Raven
+manages the delivery callback internally for Exotel.
+
+## 💫 Advanced
+
+**Send additional parameters to Exotel**
+
+Raven sends the fields present in the SMS template to Exotel by default. To send
+additional fields, please check our
+[Override doc](https://exotel.com/blog/access-control-for-exotel-apis/).
+
+**IP Whitelisting**
+
+You can control access by specifying Raven's IP address, or make sure Raven's IP
+addresses are whitelisted and not blocked. Please follow the guide
+[here](https://exotel.com/blog/access-control-for-exotel-apis/).
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## 🔗 Links
+
+- [Exotel Website](https://exotel.com/en/)
+- [Exotel SMS Documentation](https://developer.exotel.com/api/sms)
+- [Exotel Console](https://id.accounts.exotel.com/u/login/identifier?state=hKFo2SBsbXZmdFc2Q2hwdzNZdmVycXFjMXU0SW1rOThaYVIxS6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDJHRHVIMlhkMkl1NmhETHlmem5kdi0tamwzVF95Z05mo2NpZNkgSEVhSnpwMHVmTUxVRHc3ZzIzR1RNYXBxc2p4OFdnMGo)
+
+<Info>
+  If you are facing issues with this integration or find something missing,
+  please write to us at support@ravenapp.dev
+</Info>

@@ -1,0 +1,45 @@
+---
+title: "Add Device"
+description: "Add Device for a User"
+api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/users/{user_id}/devices"
+---
+
+### Parameters
+
+<Param path="app_id" type="string" required>
+
+Your AppId
+
+</Param>
+
+<Param path="user_id" type="string" required>
+
+Your user identifier
+
+</Param>
+
+### Body
+
+<Param body="fcm_token" type="string"></Param>
+
+<Param body="platform" type="android | web | ios">
+
+One of either `android`, `web`, or `ios`
+
+</Param>
+
+<RequestExample>
+
+```json Request Example
+POST /v1/apps/{{app_id}}/users/{{user_id}}/devices/ HTTP/1.1
+Host: https://api.ravenapp.dev
+Authorization: AuthKey {{secret_key}}
+Content-Type: application/json
+
+{
+    "fcm_token" : "qweKu7bdTZumJpzxUqqpxe:APA91bE9FSScPK_kENPpBAj0URYDo4z0tE6aOrBtpgaA1I1OC7GBes1lR71EWRhavLGMzDMKPPLkUoqtvPHzCgq-8ObU4AOJjbPdpkyRWqc8mqrUV2EkvsziLZvFccwtyI7-lQQhSJDe"
+    "platform" : "android"
+}
+```
+
+</RequestExample>

@@ -1,0 +1,179 @@
+{
+  "name": "Raven",
+  "logo": {
+    "light": "/logo/light.webp",
+    "dark": "/logo/dark.webp"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#536DFE",
+    "light": "#8A9CFF",
+    "dark": "#3F51B5",
+    "ultraLight": "#D6DCFF",
+    "ultraDark": "#192C96"
+  },
+  "api": {
+    "auth": {
+      "method": "key",
+      "name": "Authorization"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Login",
+      "url": "https://console.ravenapp.dev/get-started"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Access",
+    "url": "https://ravenapp.dev"
+  },
+  "anchors": [
+    {
+      "name": "Status",
+      "icon": "wave-pulse",
+      "url": "https://status.ravenapp.dev"
+    },
+    {
+      "name": "Channels",
+      "icon": "paper-plane",
+      "url": "https://ravenapp.dev/channels"
+    },
+    {
+      "name": "Support",
+      "icon": "envelope",
+      "color": "#0285c7",
+      "url": "mailto:support@ravenapp.dev"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Send Event API",
+      "pages": [
+        "api-reference/idempotent-requests",
+        "api-reference/send-event",
+        "api-reference/send-event-bulk"
+      ]
+    },
+    {
+      "group": "Users API",
+      "pages": [
+        "api-reference/create-user",
+        "api-reference/get-user-profile",
+        "api-reference/add-device",
+        "api-reference/update-device",
+        "api-reference/delete-device"
+      ]
+    },
+    {
+      "group": "Platform",
+      "pages": [
+        "platform/overview",
+        "platform/apps/apps",
+        "platform/apps/environment",
+        "platform/apps/languages",
+        "platform/integrations/integrations",
+        "platform/integrations/integration-rule",
+        "platform/events/events",
+        "platform/events/channel-fallback",
+        "platform/users",
+        "platform/logs-and-metrics",
+        "platform/extensions/extensions",
+        "platform/extensions/razorpay"
+      ]
+    },
+    {
+      "group": "SMS",
+      "pages": [
+        "sms/sending-sms",
+        "sms/delivery-status",
+        "sms/sms-template",
+        "sms/sms-integrations/exotel",
+        "sms/sms-integrations/gupshup",
+        "sms/sms-integrations/kaleyra",
+        "sms/sms-integrations/msg91",
+        "sms/sms-integrations/message-bird",
+        "sms/sms-integrations/plivo",
+        "sms/sms-integrations/text-local",
+        "sms/sms-integrations/twilio",
+        "sms/sms-integrations/value-first",
+        "sms/sms-integrations/sinch",
+        "sms/sms-integrations/route-mobile"
+      ]
+    },
+    {
+      "group": "Email",
+      "pages": [
+        "email/sending-email",
+        "email/email-template",
+        "email/email-integrations/aws-ses",
+        "email/email-integrations/mailgun",
+        "email/email-integrations/sendgrid",
+        "email/email-integrations/postmark"
+      ]
+    },
+    {
+      "group": "Push",
+      "pages": [
+        "push/sending-push",
+        "push/push-template",
+        "push/push-integrations/firebase",
+        "push/push-integrations/one-signal",
+        "push/client-sdk/android",
+        "push/client-sdk/ios",
+        "push/client-sdk/web",
+        "push/client-sdk/flutter",
+        "push/client-sdk/flutter-demo-app"
+      ]
+    },
+    {
+      "group": "WhatsApp",
+      "pages": [
+        "whatsapp/sending-whatsapp-message",
+        "whatsapp/whatsapp-template",
+        "whatsapp/whatsapp-integrations/gupshup",
+        "whatsapp/whatsapp-integrations/kaleyra",
+        "whatsapp/whatsapp-integrations/smooch",
+        "whatsapp/whatsapp-integrations/twilio",
+        "whatsapp/whatsapp-integrations/value-first",
+        "whatsapp.whatsapp-integrations/route-mobile"
+      ]
+    },
+    {
+      "group": "Voice Integrations",
+      "pages": [
+        "voice-integrations/exotel-voice",
+        "voice-integrations/twilio-voice"
+      ]
+    },
+    {
+      "group": "In-App",
+      "pages": [
+        "in-app/send-in-app-message",
+        "in-app/in-app-template",
+        "in-app/in-app-integrations/in-app-integrations",
+        "in-app/in-app-integrations/raven",
+        "in-app/in-app-integrations/in-app-angular-sdk"
+      ]
+    },
+    {
+      "group": "Chat",
+      "pages": [
+        "chat/slack/send-slack-message",
+        "chat/slack/slack-template",
+        "chat/telegram/send-telegram-message",
+        "chat/telegram/telegram-template"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/ravenappdev",
+    "discord": "https://discord.gg/MPNgtSZkgK",
+    "twitter": "https://twitter.com/ravenappdev",
+    "youtube": "https://www.youtube.com/channel/UCOsyJ8EitxcbsAfimuDkycw"
+  }
+}

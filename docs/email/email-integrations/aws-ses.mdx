@@ -1,0 +1,88 @@
+---
+title: "AWS SES"
+description: "Guide on how to add AWS SES Email Integration"
+---
+
+### Step 1. Account Setup
+
+- To access Amazon SES, you need to
+  [Sign up for AWS](https://docs.aws.amazon.com/ses/latest/dg/setting-up.html)
+  first.
+- Before you send email through Amazon SES, you need to verify that you own the
+  "From" address.
+- Initially your SES account will be in Sandbox, and you will be allowed to send
+  emails to only verified emails. You can verify all your "To" addresses or
+  domains. For more information, see
+  [Verifying identities in Amazon SES](https://docs.aws.amazon.com/ses/latest/dg/verify-addresses-and-domains.html).
+  In the AWS SES sandbox, you can only send emails to addresses/domains you have
+  verified. Also, it has a quota of 200 emails per 24-hour period at a maximum
+  rate of one email per second. To increase your sending quotas and to send
+  email to unverified email addresses, see
+  [Moving out of the Amazon SES sandbox](https://docs.aws.amazon.com/ses/latest/dg/request-production-access.html).
+
+<Note>Make sure to enable production access before you go live.</Note>
+
+### Step 2. AWS SES Integration in Raven
+
+| Keys                | Details                                                                                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `From Address`      | Your verified "From" email address                                                                                                                                                  |
+| `From Name`         | "From Name" of your emails. You can also pass this in the Send Event API. Check the Advanced section below.                                                                         |
+| `Access Key ID`     | Your AWS Access Key ID. To get your access credentials, check [here](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).     |
+| `Secret Access Key` | Your AWS Secret Access Key. To get your access credentials, check [here](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys). |
+| `Region`            | Your AWS Region. Default is "ap-south-1".                                                                                                                                           |
+| `Reply to Address`  | Reply email address. You can also pass this in the Send Event API. Check the Advanced section below.                                                                                |
+
+---
+
+<Info>
+  We currently only support sending emails via the SES REST API and not the SMTP
+  interface.
+</Info>
+
+<Warning>
+
+For security best practice, use AWS IAM user access keys instead of AWS account
+access keys. Your AWS account credentials grant full access to all your AWS
+resources, so you should instead use IAM user credentials. For more information,
+see
+[Root Account Credentials vs. IAM User Credentials](https://docs.aws.amazon.com/general/latest/gr/root-vs-iam.html).
+
+</Warning>
+
+### Step 3. Delivery Reports
+
+Setting up Delivery Reports for Emails sent via SES is a bit tricky and requires
+you to setup AWS SNS. We will soon be updating the steps to setup delivery
+reports. For more information you can refer the
+[AWS guide to configure SNS for SES](https://docs.aws.amazon.com/ses/latest/dg/configure-sns-notifications.html).
+
+## 💫 Advanced
+
+**Send additional parameters to AWS SES**
+
+Raven will send the fields present in the Email template to SES by default.
+Additionally, you can send "cc", "bcc", "From Name", "Reply-to" fields in the
+Send Event API. This will override the fields added in the Integration. Please
+check our Override doc here.
+
+**IP Whitelisting**
+
+You can control access to SES by specifying Raven's IP address, or make sure
+Raven's IP addresses are not blocked. Please follow the AWS guide
+[here](https://docs.aws.amazon.com/ses/latest/dg/control-user-access.html).
+
+    IPs: 65.2.109.100, 65.2.58.233
+
+## 🔗 Links
+
+- [AWS SES Website](https://aws.amazon.com/ses/)​
+
+- [AWS SES Documentation](https://docs.aws.amazon.com/ses/latest/dg/send-email-api.html)​
+
+- [AWS SES Console](https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fus-east-2.console.aws.amazon.com%2Fses%3FhashArgs%3D%2523%26isauthcode%3Dtrue%26region%3Dus-east-2%26state%3DhashArgsFromTB_us-east-2_bec807192e7e46a9&client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fses&forceMobileApp=0&code_challenge=m1fQT81MNDLcR00dvMm6LkM664VdQ7xTw0o8z4qwQE8&code_challenge_method=SHA-256)
+
+<Info>
+  If you are facing issues with this integration or find something missing,
+  please write to us at [support@ravenapp.dev](mailto:support@ravenapp.dev).
+</Info>
