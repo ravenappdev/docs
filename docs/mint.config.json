@@ -84,8 +84,13 @@
         "platform/events/channel-fallback",
         "platform/users",
         "platform/logs-and-metrics",
-        "platform/extensions/extensions",
-        "platform/extensions/razorpay"
+        {
+          "group": "Extensions",
+          "pages": [
+            "platform/extensions/overview",
+            "platform/extensions/razorpay"
+          ]
+        }
       ]
     },
     {
