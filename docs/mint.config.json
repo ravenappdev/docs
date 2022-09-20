@@ -52,21 +52,23 @@
       "pages": ["introduction"]
     },
     {
-      "group": "Send Event API",
+      "group": "API Reference",
       "pages": [
         "api-reference/idempotent-requests",
-        "api-reference/send-event",
-        "api-reference/send-event-bulk"
-      ]
-    },
-    {
-      "group": "Users API",
-      "pages": [
-        "api-reference/create-user",
-        "api-reference/get-user-profile",
-        "api-reference/add-device",
-        "api-reference/update-device",
-        "api-reference/delete-device"
+        {
+          "group": "Send Event API",
+          "pages": ["api-reference/send-event", "api-reference/send-event-bulk"]
+        },
+        {
+          "group": "Users API",
+          "pages": [
+            "api-reference/create-user",
+            "api-reference/get-user-profile",
+            "api-reference/add-device",
+            "api-reference/update-device",
+            "api-reference/delete-device"
+          ]
+        }
       ]
     },
     {
@@ -92,17 +94,22 @@
         "sms/sending-sms",
         "sms/delivery-status",
         "sms/sms-template",
-        "sms/sms-integrations/exotel",
-        "sms/sms-integrations/gupshup",
-        "sms/sms-integrations/kaleyra",
-        "sms/sms-integrations/msg91",
-        "sms/sms-integrations/message-bird",
-        "sms/sms-integrations/plivo",
-        "sms/sms-integrations/text-local",
-        "sms/sms-integrations/twilio",
-        "sms/sms-integrations/value-first",
-        "sms/sms-integrations/sinch",
-        "sms/sms-integrations/route-mobile"
+        {
+          "group": "SMS Integrations",
+          "pages": [
+            "sms/sms-integrations/exotel",
+            "sms/sms-integrations/gupshup",
+            "sms/sms-integrations/kaleyra",
+            "sms/sms-integrations/msg91",
+            "sms/sms-integrations/message-bird",
+            "sms/sms-integrations/plivo",
+            "sms/sms-integrations/text-local",
+            "sms/sms-integrations/twilio",
+            "sms/sms-integrations/value-first",
+            "sms/sms-integrations/sinch",
+            "sms/sms-integrations/route-mobile"
+          ]
+        }
       ]
     },
     {
@@ -110,10 +117,15 @@
       "pages": [
         "email/sending-email",
         "email/email-template",
-        "email/email-integrations/aws-ses",
-        "email/email-integrations/mailgun",
-        "email/email-integrations/sendgrid",
-        "email/email-integrations/postmark"
+        {
+          "group": "Email Integrations",
+          "pages": [
+            "email/email-integrations/aws-ses",
+            "email/email-integrations/mailgun",
+            "email/email-integrations/sendgrid",
+            "email/email-integrations/postmark"
+          ]
+        }
       ]
     },
     {
@@ -121,13 +133,23 @@
       "pages": [
         "push/sending-push",
         "push/push-template",
-        "push/push-integrations/firebase",
-        "push/push-integrations/one-signal",
-        "push/client-sdk/android",
-        "push/client-sdk/ios",
-        "push/client-sdk/web",
-        "push/client-sdk/flutter",
-        "push/client-sdk/flutter-demo-app"
+        {
+          "group": "Push Integrations",
+          "pages": [
+            "push/push-integrations/firebase",
+            "push/push-integrations/one-signal"
+          ]
+        },
+        {
+          "group": "Client SDK",
+          "pages": [
+            "push/client-sdk/android",
+            "push/client-sdk/ios",
+            "push/client-sdk/web",
+            "push/client-sdk/flutter",
+            "push/client-sdk/flutter-demo-app"
+          ]
+        }
       ]
     },
     {
@@ -135,19 +157,29 @@
       "pages": [
         "whatsapp/sending-whatsapp-message",
         "whatsapp/whatsapp-template",
-        "whatsapp/whatsapp-integrations/gupshup",
-        "whatsapp/whatsapp-integrations/kaleyra",
-        "whatsapp/whatsapp-integrations/smooch",
-        "whatsapp/whatsapp-integrations/twilio",
-        "whatsapp/whatsapp-integrations/value-first",
-        "whatsapp.whatsapp-integrations/route-mobile"
+        {
+          "group": "WhatsApp Integrations",
+          "pages": [
+            "whatsapp/whatsapp-integrations/gupshup",
+            "whatsapp/whatsapp-integrations/kaleyra",
+            "whatsapp/whatsapp-integrations/smooch",
+            "whatsapp/whatsapp-integrations/twilio",
+            "whatsapp/whatsapp-integrations/value-first",
+            "whatsapp.whatsapp-integrations/route-mobile"
+          ]
+        }
       ]
     },
     {
-      "group": "Voice Integrations",
+      "group": "Voice",
       "pages": [
-        "voice-integrations/exotel-voice",
-        "voice-integrations/twilio-voice"
+        {
+          "group": "Voice Integrations",
+          "pages": [
+            "voice-integrations/exotel-voice",
+            "voice-integrations/twilio-voice"
+          ]
+        }
       ]
     },
     {
@@ -155,18 +187,33 @@
       "pages": [
         "in-app/send-in-app-message",
         "in-app/in-app-template",
-        "in-app/in-app-integrations/in-app-integrations",
-        "in-app/in-app-integrations/raven",
-        "in-app/in-app-integrations/in-app-angular-sdk"
+        {
+          "group": "In-App Integrations",
+          "pages": [
+            "in-app/in-app-integrations/in-app-integrations",
+            "in-app/in-app-integrations/raven",
+            "in-app/in-app-integrations/in-app-angular-sdk"
+          ]
+        }
       ]
     },
     {
       "group": "Chat",
       "pages": [
-        "chat/slack/send-slack-message",
-        "chat/slack/slack-template",
-        "chat/telegram/send-telegram-message",
-        "chat/telegram/telegram-template"
+        {
+          "group": "Slack",
+          "pages": [
+            "chat/slack/send-slack-message",
+            "chat/slack/slack-template"
+          ]
+        },
+        {
+          "group": "Telegram",
+          "pages": [
+            "chat/telegram/send-telegram-message",
+            "chat/telegram/telegram-template"
+          ]
+        }
       ]
     }
   ],

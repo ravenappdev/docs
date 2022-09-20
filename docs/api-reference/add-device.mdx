@@ -7,15 +7,11 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/users/{user_id}/devices"
 ### Parameters
 
 <Param path="app_id" type="string" required>
-
-Your AppId
-
+  Your AppId
 </Param>
 
 <Param path="user_id" type="string" required>
-
-Your user identifier
-
+  Your user identifier
 </Param>
 
 ### Body
@@ -23,9 +19,7 @@ Your user identifier
 <Param body="fcm_token" type="string"></Param>
 
 <Param body="platform" type="android | web | ios">
-
-One of either `android`, `web`, or `ios`
-
+  One of either `android`, `web`, or `ios`
 </Param>
 
 <RequestExample>
