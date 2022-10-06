@@ -1,7 +1,7 @@
 ---
-title: 'Send Event'
-description: 'This API allows you to send messages'
-api: 'POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send'
+title: "Send Event"
+description: "This API allows you to send messages"
+api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
 ---
 
 ### Parameters
@@ -11,6 +11,47 @@ api: 'POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send'
 </Param>
 
 ### Body
+
+<Param body="event" type="string" required>
+  The name of the event
+</Param>
+
+<Param body="data" type="object">
+  Example: `{ "param1" : "value1", "param2" : "value2", "param3" : "object or array" }`
+</Param>
+
+<Param body="user" type="object">
+  <Expandable>
+    <Param body="user_id" type="string">
+      User's id to send the notifications to. This is your own user identifier which
+      you have used to [create user on Raven](/api-reference/create-user)
+    </Param>
+    <Param body="email" type="string">
+      User's email
+    </Param>
+    <Param body="mobile" type="string">
+      Mobile with country code prefix (e.g +91)
+    </Param>
+    <Param body="whatsapp_mobile" type="string">
+      Mobile with country code prefix (e.g +91)
+    </Param>
+    <Param body="onesignal_external_id" type="string">
+      [OneSignal External User
+      Ids](https://documentation.onesignal.com/docs/external-user-ids)
+    </Param>
+    <Param body="fcm_tokens" type="string[]">
+    List of fcm tokens.
+
+    eg. `["<fcmtoken1", "<fcmtoken2>"]`
+    </Param>
+    <Param body="override" type="object">
+      Overriding messages / integration configurations
+    </Param>
+
+  </Expandable>
+</Param>
+
+## More body parameters
 
 <Param body="event" type="string" required>
   The name of the event
