@@ -44,21 +44,53 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
 
     eg. `["<fcmtoken1", "<fcmtoken2>"]`
     </Param>
-    <Param body="override" type="object">
-      Overriding messages / integration configurations
-    </Param>
 
   </Expandable>
 </Param>
 
-More body parameters
+### Additional Body Parameters
 
-<Param body="event" type="string" required>
-  The name of the event
-</Param>
-
-<Param body="data" type="object">
-  Example: `{ "param1" : "value1", "param2" : "value2", "param3" : "object or array" }`
+<Param body="override" type="object">
+  Overriding messages / integration configurations
+  <Expandable>
+    <Param body="email" type="object">
+      <Expandable>
+        <Param body="from" type="object">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="cc" type="[]object">
+      <Expandable>
+        <Param type="object">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="sms" type="object">
+      <Expandable></Expandable>
+    </Param>
+    <Param body="whatsapp" type="object">
+      <Expandable></Expandable>
+    </Param>
+    <Param body="slack" type="object">
+      <Expandable></Expandable>
+    </Param>
+  </Expandable>
 </Param>
 
 <Param body="user" type="object">
