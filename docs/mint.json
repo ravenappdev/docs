@@ -15,7 +15,8 @@
   "api": {
     "auth": {
       "method": "key",
-      "name": "Authorization"
+      "name": "Authorization",
+      "inputPrefix": "AuthKey "
     }
   },
   "topbarLinks": [
