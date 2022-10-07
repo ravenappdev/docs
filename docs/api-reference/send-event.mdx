@@ -114,45 +114,41 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
       </Expandable>
     </Param>
     <Param body="sms" type="object">
-      <Expandable></Expandable>
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Sender
+          </Param>
+          <Param body="text" type="string">
+            SMS text
+          </Param>
+        </Param>
+      </Expandable>
     </Param>
     <Param body="whatsapp" type="object">
-      <Expandable></Expandable>
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Whatsapp text
+          </Param>
+        </Param>
+      </Expandable>
     </Param>
     <Param body="slack" type="object">
-      <Expandable></Expandable>
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Sender
+          </Param>
+          <Param body="blocks" type="object">
+            Slack blocks object
+          </Param>
+        </Param>
+      </Expandable>
     </Param>
-  </Expandable>
-</Param>
-
-<Param body="user" type="object">
-  <Expandable>
-    <Param body="user_id" type="string">
-      User's id to send the notifications to. This is your own user identifier which
-      you have used to [create user on Raven](/api-reference/create-user)
-    </Param>
-    <Param body="email" type="string">
-      User's email
-    </Param>
-    <Param body="mobile" type="string">
-      Mobile with country code prefix (e.g +91)
-    </Param>
-    <Param body="whatsapp_mobile" type="string">
-      Mobile with country code prefix (e.g +91)
-    </Param>
-    <Param body="onesignal_external_id" type="string">
-      [OneSignal External User
-      Ids](https://documentation.onesignal.com/docs/external-user-ids)
-    </Param>
-    <Param body="fcm_tokens" type="string[]">
-    List of fcm tokens.
-
-    eg. `["<fcmtoken1", "<fcmtoken2>"]`
-    </Param>
-    <Param body="override" type="object">
-      Overriding messages / integration configurations
-    </Param>
-
   </Expandable>
 </Param>
 
