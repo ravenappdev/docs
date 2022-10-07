@@ -65,15 +65,51 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
             </Param>
           </Expandable>
         </Param>
-      </Expandable>
-    </Param>
-    <Param body="cc" type="object[]">
-      <Expandable>
-        <Param body="name" type="string">
-          Sender's name
+        <Param body="cc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
         </Param>
-        <Param body="address" type="string">
-          Sender's email address
+        <Param body="bcc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="attachments" type="object[]">
+          <Expandable>
+            <Param body="file_name" type="string">
+              Attachment file name
+            </Param>
+            <Param body="content" type="string">
+              base64 encoded value of the attachment
+            </Param>
+            <Param body="url" type="string">
+              Public URL of the file
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="message" type="object">
+          <Expandable>
+            <Param body="text" type="string">
+              Email Text Body
+            </Param>
+            <Param body="html_body" type="string">
+              Email HTML Body
+            </Param>
+            <Param body="subject" type="string">
+              Email Subject
+            </Param>
+          </Expandable>
         </Param>
       </Expandable>
     </Param>
