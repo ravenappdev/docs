@@ -67,17 +67,13 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
         </Param>
       </Expandable>
     </Param>
-    <Param body="cc" type="[]object">
+    <Param body="cc" type="object[]">
       <Expandable>
-        <Param type="object">
-          <Expandable>
-            <Param body="name" type="string">
-              Sender's name
-            </Param>
-            <Param body="address" type="string">
-              Sender's email address
-            </Param>
-          </Expandable>
+        <Param body="name" type="string">
+          Sender's name
+        </Param>
+        <Param body="address" type="string">
+          Sender's email address
         </Param>
       </Expandable>
     </Param>
