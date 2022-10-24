@@ -1,7 +1,7 @@
 ---
-title: 'Send Event'
-description: 'This API allows you to send messages'
-api: 'POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send'
+title: "Send Event"
+description: "This API allows you to send messages"
+api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
 ---
 
 ### Parameters
@@ -44,10 +44,111 @@ api: 'POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send'
 
     eg. `["<fcmtoken1", "<fcmtoken2>"]`
     </Param>
-    <Param body="override" type="object">
-      Overriding messages / integration configurations
-    </Param>
 
+  </Expandable>
+</Param>
+
+### Additional Body Parameters
+
+<Param body="override" type="object">
+  Overriding messages / integration configurations
+  <Expandable>
+    <Param body="email" type="object">
+      <Expandable>
+        <Param body="from" type="object">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="cc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="bcc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="attachments" type="object[]">
+          <Expandable>
+            <Param body="file_name" type="string">
+              Attachment file name
+            </Param>
+            <Param body="content" type="string">
+              base64 encoded value of the attachment
+            </Param>
+            <Param body="url" type="string">
+              Public URL of the file
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="message" type="object">
+          <Expandable>
+            <Param body="text" type="string">
+              Email Text Body
+            </Param>
+            <Param body="html_body" type="string">
+              Email HTML Body
+            </Param>
+            <Param body="subject" type="string">
+              Email Subject
+            </Param>
+          </Expandable>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="sms" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="sender" type="string">
+            Sender
+          </Param>
+          <Param body="text" type="string">
+            SMS text
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="whatsapp" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Whatsapp text
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="slack" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Sender
+          </Param>
+          <Param body="blocks" type="object">
+            Slack blocks object
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
   </Expandable>
 </Param>
 

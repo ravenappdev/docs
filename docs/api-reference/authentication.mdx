@@ -1,0 +1,30 @@
+---
+title: "Authentication "
+---
+
+The Raven API uses API keys to authenticate requests. You can view API Key for your account in the [Raven Dashboard](https://console.ravenapp.dev/app/management/settings) (Dashboard -> Settings -> Account -> Account Details)
+
+Raven API Key is common for all the apps in the account.
+
+Do not share your API keys in publicly accessible areas such as GitHub, client-side code, and so forth.
+
+All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
+
+<RequestExample>
+
+```json Request Example
+curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/send' \
+-H 'Authorization: AuthKey {{api_key}}' \
+-H 'Content-Type: application/json' \
+-d '{
+	"event": "test",
+    "user" : {
+        "mobile" : "{{Mobile}}"
+    },
+	"data": {
+		"order_id" : "{{OrderID}}"
+	}
+}'
+```
+
+</RequestExample>

@@ -1,6 +1,6 @@
 ---
-title: "Create User"
-description: "Creates an AppUser if doesn't exist already, or updates user properties"
+title: "Create Or Update User"
+description: "Creates an user if doesn't exist already, or updates user properties"
 api: "POST https://api.ravenapp.dev/v1/apps/:app_id/users"
 ---
 
@@ -27,6 +27,36 @@ api: "POST https://api.ravenapp.dev/v1/apps/:app_id/users"
 
 <Param body="whatsapp_mobile" type="string">
   Mobile with country code prefix (e.g +91)
+</Param>
+
+<Param body="slack" type="object">
+  Slack Recipient Object
+  <Expandable>
+    <Param body="access_token" type="string" required>
+      Slack Bot Access Token
+    </Param>
+
+    <Param body="email" type="string">
+      User's slack email
+    </Param>
+
+    <Param body="channel_id" type="string">
+      Destination Slack Channel Id
+    </Param>
+  </Expandable>
+</Param>
+
+<Param body="telegram" type="object">
+  Telegram Recipient Object
+  <Expandable>
+    <Param body="chat_id" type="string">
+      Telegram Chat Id
+    </Param>
+  </Expandable>
+</Param>
+
+<Param body="onesignal_external_id" type="string">
+  Onesignal External User Identifier
 </Param>
 
 <RequestExample>
