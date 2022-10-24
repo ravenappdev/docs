@@ -55,6 +55,7 @@
       "group": "API Reference",
       "pages": [
         "api-reference/idempotent-requests",
+        "api-reference/authentication",
         {
           "group": "Send Event API",
           "pages": ["api-reference/send-event", "api-reference/send-event-bulk"]

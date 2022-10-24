@@ -9,12 +9,160 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/bulk_send"
   The `id` of the app
 </Param>
 
+### Body
+
+<Param body="event" type="string" required>
+  The name of the event
+</Param>
+
+<Param body="batch" type="object[]" required>
+Batch of messages to be triggered
+<Expandable>
+
+<Param body="data" type="object">
+  Example: `{ "param1" : "value1", "param2" : "value2", "param3" : "object or array" }`
+</Param>
+
+<Param body="user" type="object">
+  <Expandable>
+    <Param body="user_id" type="string">
+      User's id to send the notifications to. This is your own user identifier which
+      you have used to [create user on Raven](/api-reference/create-user)
+    </Param>
+    <Param body="email" type="string">
+      User's email
+    </Param>
+    <Param body="mobile" type="string">
+      Mobile with country code prefix (e.g +91)
+    </Param>
+    <Param body="whatsapp_mobile" type="string">
+      Mobile with country code prefix (e.g +91)
+    </Param>
+    <Param body="onesignal_external_id" type="string">
+      [OneSignal External User
+      Ids](https://documentation.onesignal.com/docs/external-user-ids)
+    </Param>
+    <Param body="fcm_tokens" type="string[]">
+    List of fcm tokens.
+
+    eg. `["<fcmtoken1", "<fcmtoken2>"]`
+    </Param>
+
+  </Expandable>
+</Param>
+### Additional Body Parameters
+
+<Param body="override" type="object">
+  Overriding messages / integration configurations
+  <Expandable>
+    <Param body="email" type="object">
+      <Expandable>
+        <Param body="from" type="object">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="cc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="bcc" type="object[]">
+          <Expandable>
+            <Param body="name" type="string">
+              Sender's name
+            </Param>
+            <Param body="address" type="string">
+              Sender's email address
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="attachments" type="object[]">
+          <Expandable>
+            <Param body="file_name" type="string">
+              Attachment file name
+            </Param>
+            <Param body="content" type="string">
+              base64 encoded value of the attachment
+            </Param>
+            <Param body="url" type="string">
+              Public URL of the file
+            </Param>
+          </Expandable>
+        </Param>
+        <Param body="message" type="object">
+          <Expandable>
+            <Param body="text" type="string">
+              Email Text Body
+            </Param>
+            <Param body="html_body" type="string">
+              Email HTML Body
+            </Param>
+            <Param body="subject" type="string">
+              Email Subject
+            </Param>
+          </Expandable>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="sms" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="sender" type="string">
+            Sender
+          </Param>
+          <Param body="text" type="string">
+            SMS text
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="whatsapp" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Whatsapp text
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
+    <Param body="slack" type="object">
+      <Expandable>
+        <Param body="message" type="object">
+          Message
+          <Param body="text" type="string">
+            Sender
+          </Param>
+          <Param body="blocks" type="object">
+            Slack blocks object
+          </Param>
+        </Param>
+      </Expandable>
+    </Param>
+  </Expandable>
+</Param>
+
+</Expandable>
+</Param>
+
 <RequestExample>
 
 ```json Request Example
 POST /v1/apps/{{app_id}}/events/bulk_send HTTP/1.1
 Host: https://api.ravenapp.dev
-Authorization: AuthKey {{secret_key}}
+Authorization: AuthKey {{api_key}}
 Content-Type: application/json
 
 {
@@ -48,6 +196,8 @@ Content-Type: application/json
 
 </RequestExample>
 
+{/*
+
 ## Advanced
 
 ### Extra Parameters
@@ -58,7 +208,7 @@ can add it in the override object in the request payload.
 Here's an example payload where we add extra params - email recipients (cc, bcc)
 & override the from parameter.
 
-```json Extra Parameters Example Request
+````json Extra Parameters Example Request
 {
   "event": "sample_event_1",
   "user": {
@@ -127,4 +277,6 @@ pass additional parameters - big_picture & android_channel_id
     }
 }
 
-```
+````
+
+*/}
