@@ -104,17 +104,17 @@
         {
           "group": "SMS Integrations",
           "pages": [
-            "sms/sms-integrations/exotel",
-            "sms/sms-integrations/gupshup",
-            "sms/sms-integrations/kaleyra",
-            "sms/sms-integrations/msg91",
-            "sms/sms-integrations/message-bird",
-            "sms/sms-integrations/plivo",
-            "sms/sms-integrations/text-local",
-            "sms/sms-integrations/twilio",
-            "sms/sms-integrations/value-first",
-            "sms/sms-integrations/sinch",
-            "sms/sms-integrations/route-mobile"
+            "sms/integrations/exotel",
+            "sms/integrations/gupshup",
+            "sms/integrations/kaleyra",
+            "sms/integrations/msg91",
+            "sms/integrations/message-bird",
+            "sms/integrations/plivo",
+            "sms/integrations/text-local",
+            "sms/integrations/twilio",
+            "sms/integrations/value-first",
+            "sms/integrations/sinch",
+            "sms/integrations/route-mobile"
           ]
         }
       ]
@@ -127,10 +127,10 @@
         {
           "group": "Email Integrations",
           "pages": [
-            "email/email-integrations/aws-ses",
-            "email/email-integrations/mailgun",
-            "email/email-integrations/sendgrid",
-            "email/email-integrations/postmark"
+            "email/integrations/aws-ses",
+            "email/integrations/mailgun",
+            "email/integrations/sendgrid",
+            "email/integrations/postmark"
           ]
         }
       ]
@@ -143,8 +143,8 @@
         {
           "group": "Push Integrations",
           "pages": [
-            "push/push-integrations/firebase",
-            "push/push-integrations/one-signal"
+            "push/integrations/firebase",
+            "push/integrations/one-signal"
           ]
         },
         {
@@ -167,12 +167,12 @@
         {
           "group": "WhatsApp Integrations",
           "pages": [
-            "whatsapp/whatsapp-integrations/gupshup",
-            "whatsapp/whatsapp-integrations/kaleyra",
-            "whatsapp/whatsapp-integrations/smooch",
-            "whatsapp/whatsapp-integrations/twilio",
-            "whatsapp/whatsapp-integrations/value-first",
-            "whatsapp.whatsapp-integrations/route-mobile"
+            "whatsapp/integrations/gupshup",
+            "whatsapp/integrations/kaleyra",
+            "whatsapp/integrations/smooch",
+            "whatsapp/integrations/twilio",
+            "whatsapp/integrations/value-first",
+            "whatsapp/integrations/route-mobile"
           ]
         }
       ]
@@ -183,8 +183,8 @@
         {
           "group": "Voice Integrations",
           "pages": [
-            "voice-integrations/exotel-voice",
-            "voice-integrations/twilio-voice"
+            "voice/integrations/exotel-voice",
+            "voice/integrations/twilio-voice"
           ]
         }
       ]
@@ -197,9 +197,9 @@
         {
           "group": "In-App Integrations",
           "pages": [
-            "in-app/in-app-integrations/in-app-integrations",
-            "in-app/in-app-integrations/raven",
-            "in-app/in-app-integrations/in-app-angular-sdk"
+            "in-app/integrations/in-app-integrations",
+            "in-app/integrations/raven",
+            "in-app/integrations/in-app-angular-sdk"
           ]
         }
       ]
