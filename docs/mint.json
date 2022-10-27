@@ -199,7 +199,8 @@
           "pages": [
             "in-app/integrations/in-app-integrations",
             "in-app/integrations/raven",
-            "in-app/integrations/in-app-angular-sdk"
+            "in-app/integrations/in-app-angular-sdk",
+            "in-app/integrations/in-app-react-sdk"
           ]
         }
       ]

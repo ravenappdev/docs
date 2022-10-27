@@ -1,83 +1,54 @@
 ---
-title: "Raven In-App Angular SDK"
+title: "Raven In-App React SDK"
 description: "Raven In-app SDK lets you add a notification center in your web or mobile app. If you haven't "
 ---
 
 ## Setup
 
-### Step 1
+### Step 1.
 
 Before setting up the SDK, please make sure you have followed the steps to [setup the Raven In-App Integration](https://docs.ravenapp.dev/in-app/integrations/raven) first.
 
-### Step 2
+### Step 2.&#x20;
 
-Run the following commands in your project root directory :
-
-```
-npm i @ravenapp/raven-inapp-angular
-```
-
-### Step 3
-
-Import RavenInAppModule from '@ravenapp/raven-inapp-angular' and add it to the imports array in the app.module.ts file.
+Run the following commands your project root directory :
 
 ```
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { RavenInAppModule } from '@ravenapp/raven-inapp-angular';
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    RavenInAppModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+npm i @ravenapp/raven-inapp-react
 ```
 
-### Step 4
+### Step 3.
 
-Intialize library by calling intialize method in app.component.ts
+Inorder to start using InApp React SDK ,intialize library and import InAppNotificationCenter and styles.
 
 ```
-import { Component } from '@angular/core';
-import { CountService } from '@ravenapp/raven-inapp-angular';
+import React from 'react'
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-})
-export class AppComponent {
-  constructor(private countService: CountService) {}
-  ngOnInit(): void {
-    this.countService.intialize(<appId>, <userId>, <signature>);
-  }
+import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
+import '@ravenapp/raven-inapp-react/dist/index.css'
+
+useEffect(() => {
+    countService.intialize(
+      <appId>,
+      <userId>,
+      <signature>
+    )
+}, [])
+
+const App = () => {
+  return (
+    <InAppNotificationCenter
+      color="<color>"
+      indicatorType="<indicator_type>"
+      fontStyle="<fontStyle>"
+      displayStyle="<displayStyle>"
+      position="<position>"
+      onClickNotification="<callbackFunction_reference>"
+    />
+  )
 }
 
-```
-
-### Step 5
-
-Please refer to the below code to consume the InApp Angular SDK in your app.
-
-```
-<inapp-notification-center
-      [color]="<color>"
-      [indicatorType]="<indicator_type>"
-      [fontStyle]="<fontStyle>"
-      [displayStyle]="<displayStyle>"
-      [position]="<position>"
-      [header]"<true|false>"
-      [onClickNotification]="<callbackFunction_reference>"
-    >
-</inapp-notification-center>
+export default App
 ```
 
 | Attribute           | Purpose                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                           |
@@ -91,79 +62,75 @@ Please refer to the below code to consume the InApp Angular SDK in your app.
 | fontStyle           | Custom font family for the inapp center. Default will take your system font.                                                                                                                                                                                                                                                         | 'Times', 'Courier' etc (only strings)                                                                              |
 | displayStyle        | displayStyle can be either 'drawer' or 'bubble' or 'fullScreen'. Bubble displays the notification list inside a popover. Drawer displays the notification list as full height on the right or left side of the screen depending on the position value. FullScreen comes with no bell-icon and inherits height and width from parent. | 'drawer','bubble' and 'fullScreen' (only strings)                                                                  |
 | position            | If the displayStyle is 'drawer' then position accepts two values, i.e 'left' and 'right'. If the display style is 'bubble' then position accepts three values, i.e 'left', 'center' and 'right'.                                                                                                                                     | 'left', 'right', 'center' (only strings)                                                                           |
-| header              | header can be either true or false. You can pass true, if you want the notification header which has unread count, refresh button, mark all read and close button. You can pass false, if you don't want the notification header.                                                                                                    | true or false (boolean)                                                                                            |
 
-- Do not forget to call deintialize method when user logs out otherwise user will receive notifications event after logging out. You can access the deintialize method by importing CountService.
-- When display style is 'fullScreen', there will not be bell icon. Inorder to access new notification's count, import the CountService and subscribe the count.
-- When display style is 'fullScreen', you can remove the header by passing header={false} to the inapp-notification-center component. In that case, you can access to the unread count, mark all read, reload data by importing CountService.
-  - deintialize - \<CountServiceObj\>.deintialize()
-  - mark all read - \<CountServiceObj\>.markAllRead()
-  - reload data - \<CountServiceObj\>.reloadData()
-  - unread count - \<CountServiceObj\>.unreadCount
+- Do not forget to call deintialize method when user logs out otherwise user will receive notifications event after logging out. You can access the deintialize method by importing countService.
+- When display style is 'fullScreen', there will not be bell icon. Inorder to access new notification's count, import the countService and subscribe the count.
+- When display style is 'fullScreen', you can remove the header by passing header={false} to the InAppNotificationCenter component. In that case, you can access to the unread count, mark all read, reload data by importing countService.
+  - deintialize - countService.deintialize()
+  - mark all read - countService.markAllRead()
+  - reload data - countService.reloadData()
+  - update last seen - countService.updateLastSeen() (call this function when displayStyle is 'fullScreen' and header = {false} to update the last seen)
 
 ```
-mport { Component, OnInit } from '@angular/core';
-import { CountService } from '@ravenapp/raven-inapp-angular';
+import React from 'react'
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-})
-export class AppComponent implements OnInit {
+import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
+import '@ravenapp/raven-inapp-react/dist/index.css'
 
-  constructor(private countService: CountService) {}
-  ngOnInit(): void {
-    this.countService.count.subscribe((count: any) => console.log(count));
-    this.countService.unreadCount.subscribe((unread: any) => console.log(unread));
-  }
+useEffect(() => {
+    countService.intialize(
+      <appId>,
+      <userId>,
+      <signature>
+    )
+    countService.count.subscribe((res) => console.log(res))
+    countService.unread.subscribe((res) => console.log(res))
+}, [])
+
+const App = () => {
+  return (
+    <InAppNotificationCenter
+      color="<color>"
+      indicatorType="<indicator_type>"
+      fontStyle="<fontStyle>"
+      displayStyle="<displayStyle>"
+      position="<position>"
+      onClickNotification="<callbackFunction_reference>"
+    />
+  )
 }
+
+export default App
 ```
 
-### In-App Angular Demo App
+### In-App React Demo App
 
-You can follow the below process to see the demo of In-App Angular SDK.
+You can follow the below process to see the demo of In-App React SDK.
 
-### Step1
-
-Clone this repo
+## Clone this repo
 
 ```
-git clone https://github.com/ravenappdev/inapp-angular-sdk.git
+git clone https://github.com/ravenappdev/inapp-react-sdk.git
 ```
 
-### Step 2
-
-If you haven't installed angular cli, install it using the following command:
-
-```
-npm install -g @angular/cli
-```
-
-If you are using a mac, use
-
-```
-sudo npm install -g @angular/cli
-```
-
-### Step3
-
-After installing angular cli, run the following command in the project root directory:
+## Run this command in the root folder.
 
 ```
 npm install
 ```
 
-### Step4
-
-Change the userId, appId and signature variables in projects/test/src/app/app.component.ts. More details on this present in the SDK docs.
-
-### Step5
-
-Run the following command in the project root directory to start the app:
+## Move to the example folder.
 
 ```
-ng serve test
+cd example
 ```
 
-- [Please check the github repository for setting up locally.](https://github.com/ravenappdev/inapp-angular-sdk)
+Pass the userId, appId and signature values to the InAppNotificationCenter component in example/src/App.js
+
+## Start the app.
+
+```
+npm start
+```
+
+- [Please check the github repository for setting up locally.](https://github.com/ravenappdev/inapp-react-sdk)
