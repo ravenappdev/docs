@@ -1,23 +1,21 @@
 ---
 title: "Raven In-App Angular SDK"
-description: "Raven In-app SDK lets you add a notification center in your web or mobile app. If you haven't "
+description: "Raven In-app SDK lets you add a notification center in your web or mobile app."
 ---
 
-## Setup
-
-### Step 1
+### Setup
 
 Before setting up the SDK, please make sure you have followed the steps to [setup the Raven In-App Integration](https://docs.ravenapp.dev/in-app/integrations/raven) first.
 
-### Step 2
+**Step 1**
 
-Run the following commands in your project root directory :
+Run the following commands in your project root directory.
 
 ```
 npm i @ravenapp/raven-inapp-angular
 ```
 
-### Step 3
+**Step 2**
 
 Import RavenInAppModule from '@ravenapp/raven-inapp-angular' and add it to the imports array in the app.module.ts file.
 
@@ -41,9 +39,9 @@ import { RavenInAppModule } from '@ravenapp/raven-inapp-angular';
 export class AppModule { }
 ```
 
-### Step 4
+**Step 3**
 
-Intialize library by calling intialize method in app.component.ts
+Intialize library by calling intialize method in app.component.ts.
 
 ```
 import { Component } from '@angular/core';
@@ -63,7 +61,7 @@ export class AppComponent {
 
 ```
 
-### Step 5
+**Step 4**
 
 Please refer to the below code to consume the InApp Angular SDK in your app.
 
@@ -102,7 +100,7 @@ Please refer to the below code to consume the InApp Angular SDK in your app.
   - unread count - \<CountServiceObj\>.unreadCount
 
 ```
-mport { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CountService } from '@ravenapp/raven-inapp-angular';
 
 @Component({
@@ -124,17 +122,17 @@ export class AppComponent implements OnInit {
 
 You can follow the below process to see the demo of In-App Angular SDK.
 
-### Step1
+**Step 1**
 
-Clone this repo
+Clone this repo.
 
 ```
 git clone https://github.com/ravenappdev/inapp-angular-sdk.git
 ```
 
-### Step 2
+**Step 2**
 
-If you haven't installed angular cli, install it using the following command:
+If you haven't installed angular cli, install it using the following command.
 
 ```
 npm install -g @angular/cli
@@ -146,21 +144,21 @@ If you are using a mac, use
 sudo npm install -g @angular/cli
 ```
 
-### Step3
+**Step 3**
 
-After installing angular cli, run the following command in the project root directory:
+After installing angular cli, run the following command in the project root directory.
 
 ```
 npm install
 ```
 
-### Step4
+**Step 4**
 
-Change the userId, appId and signature variables in projects/test/src/app/app.component.ts. More details on this present in the SDK docs.
+Change the userId, appId and signature variables in projects/test/src/app/app.component.ts.
 
-### Step5
+**Step 5**
 
-Run the following command in the project root directory to start the app:
+Run the following command in the project root directory to start the app.
 
 ```
 ng serve test
