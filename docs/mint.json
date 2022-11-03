@@ -143,8 +143,8 @@
         {
           "group": "Push Integrations",
           "pages": [
-            "push/integrations/firebase",
-            "push/integrations/one-signal"
+            "push/integrations/fcm",
+            "push/integrations/onesignal"
           ]
         },
         {
@@ -183,8 +183,8 @@
         {
           "group": "Voice Integrations",
           "pages": [
-            "voice/integrations/exotel-voice",
-            "voice/integrations/twilio-voice"
+            "voice/integrations/exotel",
+            "voice/integrations/twilio"
           ]
         }
       ]
