@@ -171,8 +171,8 @@
             "whatsapp/integrations/kaleyra",
             "whatsapp/integrations/smooch",
             "whatsapp/integrations/twilio",
-            "whatsapp/integrations/value-first",
-            "whatsapp/integrations/route-mobile"
+            "whatsapp/integrations/valuefirst",
+            "whatsapp/integrations/route_mobile"
           ]
         }
       ]
