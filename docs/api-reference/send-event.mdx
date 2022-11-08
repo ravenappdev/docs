@@ -152,9 +152,11 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
   </Expandable>
 </Param>
 
+
+<CodeGroup>
 <RequestExample>
 
-```json Request Example
+```json curl
 POST /v1/apps/{{app_id}}/events/send HTTP/1.1
 Host: https://api.ravenapp.dev
 Authorization: AuthKey {{secret_key}}
@@ -174,7 +176,27 @@ Content-Type: application/json
 }
 ```
 
+```java java 
+
+RavenApiClient client = new RavenApiClient("api.ravenapp.dev", Authorization.of("AuthKey <api key>"));
+try {
+    var response = client.send(Send.Request.builder()
+                .appId("<app_id>")
+                .body(SendEventRequest.builder()
+                    .event("payment_alert")
+                    .data(Map.of("name", "Adam"))
+                    .user(User.builder().mobile("+1234567890").build())
+                    .build())
+                .build());
+    
+    System.out.println(response.getId());
+} catch (SendException e) {
+   System.out.println("Failed to send request" + e.getMessage());
+}
+```
+
 </RequestExample>
+</CodeGroup>
 
 <ResponseExample>
 
