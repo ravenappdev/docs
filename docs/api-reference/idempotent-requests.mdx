@@ -12,10 +12,10 @@ Idempotency is supported in these API's:
 To perform an idempotent request, provide an additional `Idempotency-Key` header to the request.
 
 ```bash curl
-curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/send' \
--H 'Authorization: AuthKey {{api_key}}' \
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
 -H 'Content-Type: application/json' \
--H 'Idempotency-Key: W1zY2lhdXNuamxxamR3b3d' \
+-H 'Idempotency-Key: {{IDEMPOTENCY_KEY}}' \
 -d '{
 	"event": "test",
     "user" : {

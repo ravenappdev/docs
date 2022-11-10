@@ -80,15 +80,14 @@ Events tab > Click on View Event Button (Eye) > Dialog opens > Click on Test
 Event). The other way is to hit the API directly with cURL or Postman. Below is
 how the API will look like -
 
-```bash Terminal
-curl --location \
---request POST 'https://api.ravenapp.dev/v1/apps/<YOUR_APP_ID>/events/send' \
---header 'Authorization: AuthKey <YOUR_API_KEY>' \
---header 'Content-Type: application/json' \
+```bash curl
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
+-H 'Content-Type: application/json' \
 --data-raw '{
-    "event": <YOUR_EVENT_NAME>,
+    "event": "<YOUR_EVENT_NAME>",
     "user": {
-        "mobile": <YOUR_MOBILE_NUMBER>
+        "mobile": "<YOUR_MOBILE_NUMBER>"
     },
     "data": {
         "user_name": "John Doe"

@@ -156,8 +156,8 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
 <RequestExample>
 
 ```json curl
-curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/send' \
--H 'Authorization: AuthKey {{api_key}}' \
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
 -H 'Content-Type: application/json' \
 -d '{
     "event": "sample_event_1",
@@ -174,10 +174,10 @@ curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/send' \
 ```
 
 ```java java 
-RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <api_key>"));
+RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <API_KEY>"));
 try {
     var response = client.send(Send.Request.builder()
-                .appId("<app_id>")
+                .appId("<APP_ID>")
                 .body(SendEventRequest.builder()
                     .event("payment_alert")
                     .data(Map.of("name", "Adam"))
@@ -193,33 +193,22 @@ try {
 
 ```javascript node
 const client = new RavenApi.Client({
-  authorization: `AuthKey ${api_key}`,
+  authorization: `AuthKey ${API_KEY}`,
 });
 
-const sendEventResponse = await raven.sendBulk({
-  appId: ravenAppId,
+const sendEventResponse = await raven.send({
+  appId: "<APP_ID>",
   _body: {
     event: "sample_event_1",
-    batch : [
-      user: {
-        mobile: "+919876543210",
-        email: "x@ravenapp.dev",
-        whatsapp_mobile: "+919876543210"
-      },
-      data: {
-        name: "John Doe",
-        date: "01 December 2020",
-      },
-      {
-        mobile: "+919876543210",
-        email: "x@ravenapp.dev",
-        whatsapp_mobile: "+919876543210"
-      },
-      data: {
-        name: "John Doe",
-        date: "01 December 2020",
-      }
-    ]
+    user: {
+      mobile: "+919876543210",
+      email: "x@ravenapp.dev",
+      whatsapp_mobile: "+919876543210"
+    },
+    data: {
+      name: "John Doe",
+      date: "01 December 2020",
+    }
   },
 });
 

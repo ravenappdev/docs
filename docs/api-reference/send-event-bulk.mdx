@@ -160,8 +160,8 @@ Batch of messages to be triggered
 <RequestExample>
 
 ```json curl
-curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/bulk_send' \
--H 'Authorization: AuthKey {{api_key}}' \
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/bulk_send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
 -H 'Content-Type: application/json' \
 -d '{
     "event": "sample_event_1",
@@ -193,10 +193,10 @@ curl 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/bulk_send' \
 ```
 
 ```java java 
-RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <api key>"));
+RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <API_KEY>"));
       try {
           var response = ravenApiClient.sendBulk(SendBulk.Request.builder()
-                        .appId(appId)
+                        .appId("<APP_ID>")
                         .body(BulkSendEventRequest.builder()
                                 .event("event_1")
                                 .batch(BatchEvent.builder()
@@ -219,11 +219,11 @@ RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <api key>")
 
 ```javascript node
 const client = new RavenApi.Client({
-  authorization: `AuthKey ${api_key}`,
+  authorization: `AuthKey ${API_KEY}`,
 });
 
 const sendEventResponse = await raven.sendBulk({
-  appId: ravenAppId,
+  appId: "<APP_ID>",
   _body: {
     event: "sample_event_1",
     batch : [
