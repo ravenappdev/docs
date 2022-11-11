@@ -114,7 +114,9 @@
             "sms/integrations/twilio",
             "sms/integrations/valuefirst",
             "sms/integrations/sinch",
-            "sms/integrations/route_mobile"
+            "sms/integrations/route_mobile",
+            "sms/integrations/2factor",
+            "sms/integrations/clicksend"
           ]
         }
       ]
@@ -142,10 +144,7 @@
         "push/push-template",
         {
           "group": "Push Integrations",
-          "pages": [
-            "push/integrations/fcm",
-            "push/integrations/onesignal"
-          ]
+          "pages": ["push/integrations/fcm", "push/integrations/onesignal"]
         },
         {
           "group": "Client SDK",
@@ -182,10 +181,7 @@
       "pages": [
         {
           "group": "Voice Integrations",
-          "pages": [
-            "voice/integrations/exotel",
-            "voice/integrations/twilio"
-          ]
+          "pages": ["voice/integrations/exotel", "voice/integrations/twilio"]
         }
       ]
     },
