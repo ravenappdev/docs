@@ -152,15 +152,14 @@ api: "POST https://api.ravenapp.dev/v1/apps/{app_id}/events/send"
   </Expandable>
 </Param>
 
+
 <RequestExample>
 
-```json Request Example
-POST /v1/apps/{{app_id}}/events/send HTTP/1.1
-Host: https://api.ravenapp.dev
-Authorization: AuthKey {{secret_key}}
-Content-Type: application/json
-
-{
+```json curl
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
+-H 'Content-Type: application/json' \
+-d '{
     "event": "sample_event_1",
     "user": {
         "mobile": "+919876543210",
@@ -171,6 +170,52 @@ Content-Type: application/json
         "name": "John Doe",
         "date": "01 December 2020"
     }
+}'
+```
+
+```java java 
+RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <API_KEY>"));
+try {
+    var response = client.send(Send.Request.builder()
+                .appId("<APP_ID>")
+                .body(SendEventRequest.builder()
+                    .event("payment_alert")
+                    .data(Map.of("name", "Adam"))
+                    .user(User.builder().mobile("+1234567890").build())
+                    .build())
+                .build());
+    
+    System.out.println(response.getId());
+} catch (SendException e) {
+   System.out.println("Failed to send request" + e.getMessage());
+}
+```
+
+```javascript node
+const client = new RavenApi.Client({
+  authorization: `AuthKey ${API_KEY}`,
+});
+
+const sendEventResponse = await raven.send({
+  appId: "<APP_ID>",
+  _body: {
+    event: "sample_event_1",
+    user: {
+      mobile: "+919876543210",
+      email: "x@ravenapp.dev",
+      whatsapp_mobile: "+919876543210"
+    },
+    data: {
+      name: "John Doe",
+      date: "01 December 2020",
+    }
+  },
+});
+
+if (sendEventResponse.ok) {
+  console.log(`The id of the event is ${sendEventResponse.body.id}`);
+} else {
+  console.error("Failed to send event", sendEventResponse.error);
 }
 ```
 
