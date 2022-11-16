@@ -11,7 +11,7 @@ Before setting up the SDK, please make sure you have followed the steps to [setu
 
 Run the following commands in your project root directory.
 
-```
+```bash
 npm i @ravenapp/raven-inapp-angular
 ```
 
@@ -19,7 +19,7 @@ npm i @ravenapp/raven-inapp-angular
 
 Import RavenInAppModule from '@ravenapp/raven-inapp-angular' and add it to the imports array in the app.module.ts file.
 
-```
+```javascript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -43,7 +43,7 @@ export class AppModule { }
 
 Intialize library by calling intialize method in app.component.ts.
 
-```
+```javascript
 import { Component } from '@angular/core';
 import { CountService } from '@ravenapp/raven-inapp-angular';
 
@@ -65,15 +65,15 @@ export class AppComponent {
 
 Please refer to the below code to consume the InApp Angular SDK in your app.
 
-```
+```html
 <inapp-notification-center
       [color]="<color>"
       [indicatorType]="<indicator_type>"
       [fontStyle]="<fontStyle>"
       [displayStyle]="<displayStyle>"
       [position]="<position>"
-      [header]"<true|false>"
-      [onClickNotification]="<callbackFunction_reference>"
+      [header]="<true|false>"
+      [onClickNotification]="<callback_func()>"
     >
 </inapp-notification-center>
 ```
@@ -99,7 +99,7 @@ Please refer to the below code to consume the InApp Angular SDK in your app.
   - reload data - \<CountServiceObj\>.reloadData()
   - unread count - \<CountServiceObj\>.unreadCount
 
-```
+```javascript
 import { Component, OnInit } from '@angular/core';
 import { CountService } from '@ravenapp/raven-inapp-angular';
 
@@ -126,7 +126,7 @@ You can follow the below process to see the demo of In-App Angular SDK.
 
 Clone this repo.
 
-```
+```bash
 git clone https://github.com/ravenappdev/inapp-angular-sdk.git
 ```
 
@@ -134,13 +134,13 @@ git clone https://github.com/ravenappdev/inapp-angular-sdk.git
 
 If you haven't installed angular cli, install it using the following command.
 
-```
+```bash
 npm install -g @angular/cli
 ```
 
 If you are using a mac, use
 
-```
+```bash
 sudo npm install -g @angular/cli
 ```
 
@@ -148,7 +148,7 @@ sudo npm install -g @angular/cli
 
 After installing angular cli, run the following command in the project root directory.
 
-```
+```bash
 npm install
 ```
 
@@ -160,7 +160,7 @@ Change the userId, appId and signature variables in projects/test/src/app/app.co
 
 Run the following command in the project root directory to start the app.
 
-```
+```bash
 ng serve test
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "React SDK"
-description: "Raven In-app SDK lets you add a notification center in your web or mobile app."
+description: "Raven In-app SDK lets you add a notification center in your react web or mobile app."
 ---
 
 ## Setup
@@ -11,7 +11,7 @@ Before setting up the SDK, please make sure you have followed the steps to [setu
 
 Run the following commands your project root directory.
 
-```
+```bash
 npm i @ravenapp/raven-inapp-react
 ```
 
@@ -19,7 +19,7 @@ npm i @ravenapp/raven-inapp-react
 
 Inorder to start using InApp React SDK ,intialize library and import InAppNotificationCenter and styles.
 
-```
+```javascript
 import React from 'react'
 
 import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
@@ -69,7 +69,7 @@ export default App
   - reload data - countService.reloadData()
   - update last seen - countService.updateLastSeen() (call this function when displayStyle is 'fullScreen' and header = {false} to update the last seen)
 
-```
+```javascript
 import React from 'react'
 
 import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
@@ -109,7 +109,7 @@ You can follow the below process to see the demo of In-App React SDK.
 
 Clone this repo.
 
-```
+```bash
 git clone https://github.com/ravenappdev/inapp-react-sdk.git
 ```
 
@@ -117,7 +117,7 @@ git clone https://github.com/ravenappdev/inapp-react-sdk.git
 
 Run this command in the root folder.
 
-```
+```bash
 npm install
 ```
 
@@ -125,7 +125,7 @@ npm install
 
 Move to the example folder.
 
-```
+```bash
 cd example
 ```
 
@@ -137,7 +137,7 @@ Pass the userId, appId and signature values to the InAppNotificationCenter compo
 
 Run the following command in the project root directory to start the app.
 
-```
+```bash
 npm start
 ```
 
