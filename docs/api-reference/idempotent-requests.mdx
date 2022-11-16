@@ -11,21 +11,21 @@ Idempotency is supported in these API's:
 
 To perform an idempotent request, provide an additional `Idempotency-Key` header to the request.
 
-```bash Terminal
-curl --location --request POST 'https://api.ravenapp.dev/v1/apps/{{app_id}}/events/send' \
---header 'Idempotency-Key: W1zY2lhdXNuamxxamR3b3d' \
---header 'Authorization: AuthKey {{secret_key}}' \
---header 'Content-Type: application/json' \
---data-raw '{
+```bash curl
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
+-H 'Content-Type: application/json' \
+-H 'Idempotency-Key: {{IDEMPOTENCY_KEY}}' \
+-d '{
 	"event": "test",
-        "user" : {
-          "mobile" : "+919876543210"
-        },
-	"data" : {
-          "customer_name" : "Doodle",
-          "client_name" : "John",
-          "order_amount" : "123"
-	}
+    "user" : {
+      "mobile" : "+919876543210"
+    },
+    "data" : {
+      "customer_name" : "Doodle",
+      "client_name" : "John",
+      "order_amount" : "123"
+    }
 }'
 ```
 

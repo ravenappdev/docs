@@ -108,13 +108,13 @@
             "sms/integrations/gupshup",
             "sms/integrations/kaleyra",
             "sms/integrations/msg91",
-            "sms/integrations/message-bird",
+            "sms/integrations/message_bird",
             "sms/integrations/plivo",
-            "sms/integrations/text-local",
+            "sms/integrations/text_local",
             "sms/integrations/twilio",
-            "sms/integrations/value-first",
+            "sms/integrations/valuefirst",
             "sms/integrations/sinch",
-            "sms/integrations/route-mobile"
+            "sms/integrations/route_mobile"
           ]
         }
       ]
@@ -127,7 +127,7 @@
         {
           "group": "Email Integrations",
           "pages": [
-            "email/integrations/aws-ses",
+            "email/integrations/aws_ses",
             "email/integrations/mailgun",
             "email/integrations/sendgrid",
             "email/integrations/postmark"
@@ -143,8 +143,8 @@
         {
           "group": "Push Integrations",
           "pages": [
-            "push/integrations/firebase",
-            "push/integrations/one-signal"
+            "push/integrations/fcm",
+            "push/integrations/onesignal"
           ]
         },
         {
@@ -171,8 +171,8 @@
             "whatsapp/integrations/kaleyra",
             "whatsapp/integrations/smooch",
             "whatsapp/integrations/twilio",
-            "whatsapp/integrations/value-first",
-            "whatsapp/integrations/route-mobile"
+            "whatsapp/integrations/valuefirst",
+            "whatsapp/integrations/route_mobile"
           ]
         }
       ]
@@ -183,8 +183,8 @@
         {
           "group": "Voice Integrations",
           "pages": [
-            "voice/integrations/exotel-voice",
-            "voice/integrations/twilio-voice"
+            "voice/integrations/exotel",
+            "voice/integrations/twilio"
           ]
         }
       ]
