@@ -5,7 +5,7 @@ description: "Guide on how to add 2Factor SMS provider."
 
 ### Step 1. Account Setup
 
-If you do not have an account with 2Factor yet, you can easily create an account **[here](https://2factor.in/v3/free-bulk-sms-service-trial/index.php)**.
+If you do not have an account with 2Factor yet, you can easily create an account [here](https://2factor.in/v3/free-bulk-sms-service-trial/index.php)\*\*.
 
 To be able to send bulk sms to your clients, as per new TRAI regulations you also need to register on the DLT platform. Follow the steps to register on DLT platform [here](https://www.notion.so/DLT-Registration-Steps-ca272ad868cc4014920a8c964ebd4294) (or 2 factor link [here](http://2factor.in/v3/dlt/trai-mandatory-dlt-registration/))
 
@@ -20,14 +20,12 @@ Once you have registered yourself on DLT and created a 2Factor account, you can 
 
 In the provider form in Raven for 2Factor, you need to fill the following values
 
-| Key           | Details                                                                                                                                                                                                                                                                                                  |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name          | A unique name for the integration                                                                                                                                                                                                                                                                        |
-| Api Key       | If you are signed up in 2Factor.in, you can get your api key here                                                                                                                                                                                                                                        |
-| Sender Id     | Sender id to be sent with the SMS. It has to be a preconfigured 6 characters alphabetical sender id for the enterprise account. The Sender ID should be linked with the SMS template as registered on DLT portal. Learn more about DLT Sender Id here                                                    |
-| Route         | Applicable only for SMSes sent by Indian businesses to Indian destination numbers. Use the route type specified when registering your templates. Possible values: Transactional, OTP, Promotional.                                                                                                       |
+| Key | Details |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | |
+| Api Key | If you are signed up in 2Factor.in, you can get your api key [here](https://2factor.in/CP/Dashboard_list.php) |
+| Sender Id | It has to be a preconfigured 6 characters alphabetical sender id for the enterprise account. The Sender ID should be linked with the SMS template as registered on DLT portal. Learn more about DLT Sender Id [here](https://www.notion.so/ca272ad868cc4014920a8c964ebd4294#548fac75619042cf8bbbac2471016ced). Use 'Request Sender Id' option provided under Addon Services >> Transactional SMS >> Request Sender Id. For transactions messages See here. For OTP messages see here |
+| Route | Applicable only for SMSes sent by Indian businesses to Indian destination numbers. Use the route type specified when registering your templates. Possible values: Transactional, OTP, Promotional. |
 | DLT Entity ID | Applicable only for SMS sent by Indian businesses to Indian destination numbers. Your Entity Id as registered on DLT (Distributed Ledger Technology) portal of operators in India. This is mandatory to be passed in API or configured on Dashboard for SMSes towards Indian destination. Read more here |
-| Callback URL  | This is an optional field where you can assign your system callback url to get all reports at your database endpoint                                                                                                                                                                                     |
 
 ### Step 3. Delivery Reports
 
