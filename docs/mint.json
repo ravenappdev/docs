@@ -171,7 +171,7 @@
             "whatsapp/integrations/smooch",
             "whatsapp/integrations/twilio",
             "whatsapp/integrations/valuefirst",
-            "whatsapp/integrations/route_mobile"
+            "whatsapp/integrations/route mobile"
           ]
         }
       ]
@@ -193,10 +193,14 @@
         {
           "group": "In-App Integrations",
           "pages": [
-            "in-app/integrations/in-app-integrations",
-            "in-app/integrations/raven",
-            "in-app/integrations/in-app-angular-sdk",
-            "in-app/integrations/in-app-react-sdk"
+            "in-app/integrations/raven"
+          ]
+        },
+        {
+          "group": "Client SDK",
+          "pages": [
+            "in-app/client-sdk/angular",
+            "in-app/client-sdk/react"
           ]
         }
       ]

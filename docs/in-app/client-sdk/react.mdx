@@ -1,27 +1,27 @@
 ---
-title: "Raven In-App React SDK"
-description: "Raven In-app SDK lets you add a notification center in your web or mobile app. If you haven't "
+title: "React SDK"
+description: "Raven In-app SDK lets you add a notification center in your react web or mobile app."
 ---
 
 ## Setup
 
-### Step 1
+**Step 1**
 
 Before setting up the SDK, please make sure you have followed the steps to [setup the Raven In-App Integration](https://docs.ravenapp.dev/in-app/integrations/raven) first.
 
-### Step 2
+**Step 2**
 
-Run the following commands your project root directory :
+Run the following commands your project root directory.
 
-```
+```bash
 npm i @ravenapp/raven-inapp-react
 ```
 
-### Step 3
+**Step 3**
 
 Inorder to start using InApp React SDK ,intialize library and import InAppNotificationCenter and styles.
 
-```
+```javascript
 import React from 'react'
 
 import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
@@ -53,8 +53,8 @@ export default App
 
 | Attribute           | Purpose                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                           |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| userId              | Unique identifier of the user opening the notification center                                                                                                                                                                                                                                                                        |                                                                                                                    |
-| appId               |                                                                                                                                                                                                                                                                                                                                      | Raven App ID. Go to Raven dashboard > Settings > AppID                                                             |
+| userId              | Unique identifier of the user opening the notification center                                                                                                                                                                                                                                                                        |  "john_08"                                                                                                         |
+| appId               | Raven App ID. Go to Raven dashboard > Settings > AppID                                                                                                                                                                                                                                                                               |  ddf001ae-035f-4414-8c72-6f71231e2205                                                                              |
 | signature           | Unique signature generated for the user as described [here](https://app.gitbook.com/o/fOW2cG82hufCVVoTWX7c/s/-MG-HQd2A2Z9XgtUEjJF/~/changes/ZHEZ9iwpjrSgRPltkzMp/in-app/integrations/raven#step-2.-generate-a-unique-signature-for-every-user)                                                                                       |                                                                                                                    |
 | onClickNotification | Method that handles notification click. Args: (clickAction, customData). ClickAction string and CustomData map will be provided in the template and passed to the handler. Use clickAction to identify what action to perform on click and customData to pass any additional data that might be useful to perfor the click action.   | `(clickAction, customData) => { if (clickAction === "OPEN_ORDER_PAGE") { open("/orders", customData["orderId"])}}` |
 | color               | This is your primary color. It will get applied to the buttons and other UI components in the inapp center                                                                                                                                                                                                                           | 'red', '#FF0000', 'rgb(255,0,0)' (only strings)                                                                    |
@@ -71,7 +71,7 @@ export default App
   - reload data - countService.reloadData()
   - update last seen - countService.updateLastSeen() (call this function when displayStyle is 'fullScreen' and header = {false} to update the last seen)
 
-```
+```javascript
 import React from 'react'
 
 import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
@@ -107,29 +107,39 @@ export default App
 
 You can follow the below process to see the demo of In-App React SDK.
 
-## Clone this repo
+**Step 1**
 
-```
+Clone this repo.
+
+```bash
 git clone https://github.com/ravenappdev/inapp-react-sdk.git
 ```
 
-## Run this command in the root folder.
+**Step 2**
 
-```
+Run this command in the root folder.
+
+```bash
 npm install
 ```
 
-## Move to the example folder.
+**Step 3**
 
-```
+Move to the example folder.
+
+```bash
 cd example
 ```
 
-Pass the userId, appId and signature values to the InAppNotificationCenter component in example/src/App.js
+**Step 4**
 
-## Start the app.
+Pass the userId, appId and signature values to the InAppNotificationCenter component in example/src/App.js.
 
-```
+**Step 5**
+
+Run the following command in the project root directory to start the app.
+
+```bash
 npm start
 ```
 

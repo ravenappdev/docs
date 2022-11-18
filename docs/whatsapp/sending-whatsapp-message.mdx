@@ -63,15 +63,16 @@ Click on View Event Button (Eye) > Dialog opens > Click on Test Event). The
 other way is to hit the API directly with cURL or Postman. Below is how the API
 will look like:
 
-```bash Terminal
-curl --location \
---request POST 'https://api.ravenapp.dev/v1/apps/<YOUR_APP_ID>/events/send' \
---header 'Authorization: AuthKey <YOUR_API_KEY>' \
---header 'Content-Type: application/json' \
+<CodeGroup>
+
+```bash curl
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
+-H 'Content-Type: application/json' \
 --data-raw '{
-    "event": <YOUR_EVENT_NAME>,
+    "event": "<YOUR_EVENT_NAME>",
     "user": {
-        "mobile": "<MOBILE>"
+        "mobile": "<MOBILE_NO>"
     },
     "data": {
         "user_name": "John Doe"
@@ -79,12 +80,58 @@ curl --location \
 }'
 ```
 
+```java java
+RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <YOUR_API_KEY>"));
+try {
+    var response = client.send(Send.Request.builder()
+                .appId("<YOUR_APP_ID>")
+                .body(SendEventRequest.builder()
+                    .event("YOUR_EVENT_NAME")
+                    .data(Map.of("name", "Adam"))
+                    .user(User.builder().mobile("<MOBILE_NO>").build())
+                    .build())
+                .build());
+    
+    System.out.println(response.getId());
+} catch (SendException e) {
+   System.out.println("Failed to send request" + e.getMessage());
+}
+```
+
+```javascript node
+const client = new RavenApi.Client({
+  authorization: `AuthKey ${YOUR_API_KEY}`,
+});
+
+const sendEventResponse = await raven.send({
+  appId: "<YOUR_APP_ID>",
+  _body: {
+    event: "YOUR_EVENT_NAME",
+    user: {
+      mobile: "<MOBILE_NO>",
+    },
+    data: {
+      name: "John Doe",
+      date: "01 December 2020",
+    }
+  },
+});
+
+if (sendEventResponse.ok) {
+  console.log(`The id of the event is ${sendEventResponse.body.id}`);
+} else {
+  console.error("Failed to send event", sendEventResponse.error);
+}
+```
+
+</CodeGroup>
+
 |                 |                                                                                                              |
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | YOUR_APP_ID     | App ID of the currently selected App. Go to Settings > App in the dashboard to view.                         |
 | YOUR_API_KEY    | The Account API Key. Go to Settings > Account in the dashboard to view.                                      |
 | YOUR_EVENT_NAME | Name of the Event we created above in Step 2.                                                                |
-| MOBILE          | Mobile number of the recipient.                                                                              |
+| MOBILE_NO       | Mobile number of the recipient.                                                                              |
 | `data`          | The data object contains "key": "value" pairs of any dynamic text that you would have added in the template. |
 
 Copy the cURL request and simply hit enter in your terminal.

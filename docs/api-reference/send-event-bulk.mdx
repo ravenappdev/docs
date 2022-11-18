@@ -159,13 +159,11 @@ Batch of messages to be triggered
 
 <RequestExample>
 
-```json Request Example
-POST /v1/apps/{{app_id}}/events/bulk_send HTTP/1.1
-Host: https://api.ravenapp.dev
-Authorization: AuthKey {{api_key}}
-Content-Type: application/json
-
-{
+```json curl
+curl 'https://api.ravenapp.dev/v1/apps/{{APP_ID}}/events/bulk_send' \
+-H 'Authorization: AuthKey {{API_KEY}}' \
+-H 'Content-Type: application/json' \
+-d '{
     "event": "sample_event_1",
     "batch": [
         {
@@ -191,6 +189,70 @@ Content-Type: application/json
             }
         }
     ]
+}'
+```
+
+```java java 
+RavenApiClient client = new RavenApiClient(Authorization.of("AuthKey <API_KEY>"));
+      try {
+          var response = ravenApiClient.sendBulk(SendBulk.Request.builder()
+                        .appId("<APP_ID>")
+                        .body(BulkSendEventRequest.builder()
+                                .event("event_1")
+                                .batch(BatchEvent.builder()
+                                        .data(Map.of("name", "Sriyansh"))
+                                        .user(User.builder().mobile("+918718181818").build())
+                                        .build())
+                                .batch(BatchEvent.builder()
+                                        .data(Map.of("name", "Priyansh"))
+                                        .user(User.builder().mobile("+918718181818").build())
+                                        .build())
+                                .build()
+                        )
+                        .build());
+          System.out.println("Successfully sent a bulk request " + response.getId());
+      } catch (SendBulkException e) {
+          System.out.println("Failed to send bulk request" + e.getMessage());
+      }
+}
+```
+
+```javascript node
+const client = new RavenApi.Client({
+  authorization: `AuthKey ${API_KEY}`,
+});
+
+const sendEventResponse = await raven.sendBulk({
+  appId: "<APP_ID>",
+  _body: {
+    event: "sample_event_1",
+    batch : [
+      user: {
+        mobile: "+919876543210",
+        email: "x@ravenapp.dev",
+        whatsapp_mobile: "+919876543210"
+      },
+      data: {
+        name: "John Doe",
+        date: "01 December 2020",
+      },
+      {
+        mobile: "+919876543210",
+        email: "x@ravenapp.dev",
+        whatsapp_mobile: "+919876543210"
+      },
+      data: {
+        name: "John Doe",
+        date: "01 December 2020",
+      }
+    ]
+  },
+});
+
+if (sendEventResponse.ok) {
+  console.log(`The id of the event is ${sendEventResponse.body.id}`);
+} else {
+  console.error("Failed to send event", sendEventResponse.error);
 }
 ```
 
