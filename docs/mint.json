@@ -116,7 +116,7 @@
             "sms/integrations/valuefirst",
             "sms/integrations/sinch",
             "sms/integrations/route_mobile",
-            "sms/integrations/raven"
+            "sms/integrations/raven",
             "sms/integrations/2factor",
             "sms/integrations/clicksend"
           ]
@@ -195,16 +195,11 @@
         "in-app/in-app-template",
         {
           "group": "In-App Integrations",
-          "pages": [
-            "in-app/integrations/raven"
-          ]
+          "pages": ["in-app/integrations/raven"]
         },
         {
           "group": "Client SDK",
-          "pages": [
-            "in-app/client-sdk/angular",
-            "in-app/client-sdk/react"
-          ]
+          "pages": ["in-app/client-sdk/angular", "in-app/client-sdk/react"]
         }
       ]
     },
