@@ -116,6 +116,8 @@
             "sms/integrations/sinch",
             "sms/integrations/route_mobile",
             "sms/integrations/raven"
+            "sms/integrations/2factor",
+            "sms/integrations/clicksend"
           ]
         }
       ]
