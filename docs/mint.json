@@ -115,6 +115,7 @@
             "sms/integrations/valuefirst",
             "sms/integrations/sinch",
             "sms/integrations/route_mobile",
+            "sms/integrations/raven"
             "sms/integrations/2factor",
             "sms/integrations/clicksend"
           ]
@@ -132,7 +133,8 @@
             "email/integrations/aws_ses",
             "email/integrations/mailgun",
             "email/integrations/sendgrid",
-            "email/integrations/postmark"
+            "email/integrations/postmark",
+            "email/integrations/raven"
           ]
         }
       ]
