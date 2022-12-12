@@ -1,0 +1,153 @@
+---
+title: "DLT Registration Steps"
+---
+
+Telecom Regulatory Authority of India (TRAI) has recently released a [new regulation](https://trai.gov.in/sites/default/files/RegulationUcc19072018.pdf) for the Bulk SMS industry. As per the recent guidelines, it is mandatory for a company to register on the DLT
+platform before sending Bulk SMS to its customers and clients. A Business Entity has to
+
+1. [Register itself on the DLT portal](#1-register-your-business-entity-in-the-dlt-portal)
+2. [Add Telemarketer in your registered DLT portal.](#2-add-telemarketer-in-your-registered-dlt-portal)
+3. [Register Sender IDs](#3-register-sender-i-ds)
+4. [Add Consent Template (only for **Promotional and Service Explicit SMS** )](#4-add-consent-template-in-dlt)
+5. [Add Content Template for all SMS](#5-add-content-template-in-dlt)
+6. Get their approval before sending Bulk SMS.
+
+
+You can register in any of the DLT platforms namely Jio, Vodafone, Airtel, BSNL, MTNL, Videocon and Tata Teleservices. Jio Registrations are currently free. Generally registration charges are Rs 5900 for one year.
+
+All the DLT operators data is synced with each other so you may register in any one of the DLT platforms.
+
+(Once DLT registration is done you have to use any of the bulk sms providers via [Raven](https://www.raven.dev/channels) to send the messages.)
+
+**List DLT operators in India**
+
+* [Jio DLT portal](https://trueconnect.jio.com/#/)
+* [Vodafone DLT portal](https://www.vilpower.in/)
+* [Airtel DLT portal](https://dltconnect.airtel.in/)
+* [BSNL DLT portal](https://www.ucc-bsnl.co.in/)
+* [MTNL DLT portal](https://www.ucc-mtnl.in/)
+* [Videocon DLT portal](https://smartping.live/entity/login)
+* [Tata Teleservices DLT portal](https://telemarketer.tatateleservices.com:8082/#/)
+
+## 1. Register your Business Entity in the DLT portal
+
+**Step 1**
+
+ Visit any of the DLT portal links shared before. Have to click on Sign up/ Register option whichever is available to register your entity. 
+
+**Step 2**
+
+Generally there are 2 options to choose from
+
+1. Principle Entity
+2. Telemarketer
+
+Select **Principle Entity** option.
+
+**Step 3**
+
+If you are registering on the DLT platform for the first time then select no and you have to fill in all the necessary details about your organisation including your organisation type and Business PAN number. There could be some further KYC related document upload and details like name, email id, phone number, password for the portal etc to be filled for verification
+
+**Step 4**
+
+Once all details are filled and confirmed to verify, you will be asked to enter an OTP that is sent to your registered mobile number. 
+
+**Step 5**
+
+Once OTP is entered, you will receive an email on your registered email id.
+
+Some Operators send a verification link on the email itself, some verify it on their side and inform you in a couple of days. The order of registration process/ steps may vary from portal to portal. But largely you have to undergo the mentioned 4 steps to register as a business entity on any of the DLT portal.
+
+Once your registration process is completed and your business entity is created on the DLT portal and you will be assigned a **unique DLT ID.** While sending sms via any sms provider service using [Raven](https://www.raven.dev/), you need to provide this DLT ID. Next you need to login for the next step which is [adding telemarketer](#2-add-telemarketer-in-your-registered-dlt-portal).
+
+## 2. Add Telemarketer in your registered DLT portal
+
+By now you might have decided on the [sms provider](https://www.raven.dev/channels) to send sms to your customer. Every provider is already registered on the DLT portal as a telemarketer and has its own entity id.  You have to search and select the Telemarketer name and id and finally apply. 
+
+Once selected, you will be redirected to the registration fee  page for a payment of 5900/- for a year. (Jio does free registration as of now). 
+
+Some portal will register instantly while some may verify all documents and then register in a couple of days. 
+
+Your business entity is now registered on DLT and you can now move on to the next step that is [Register Sender Ids](#3-register-sender-i-ds).
+
+## 3. Register Sender IDs
+
+Sender Id  (or Header in case of bulk sms) is a unique 6 character id which represents the company which is sending sms. In this case this is your registered business entity. 
+
+**Step 1** 
+
+Login to your registered DLT portal and select **Header SMS Registration** option
+
+**Step 2** 
+
+Once the option is selected you will have to select the **Header Type**
+
+**Types of Headers (Message Type)**
+
+**Promotional**:  Marketing messages intended to promote a product or a service. These are sent only to NON DND phone numbers. 
+
+**Others**: Transactional, Service Implicit and Service Explicit messages are under Others category. 
+
+- **Transactional**: As per the new TRAI guidelines, **only the OTP sms** sent by any bank (National,  Private, Govt. MNC) to its clients come under the category of Transactional SMS.
+- **Service Implicit**:  Important informative messages (other than Bank OTPs) such as purchase updates, order and payment alerts and status, reminders, booking confirmations, OTP SMS from other sites, and other crucial updates  fall under Service Implicit category.
+- **Service Explicit**:  Offer/ Marketing SMSs only to your registered users according to their consent preference fall under Service Explicit.
+
+**Step 3**
+
+Once the Type of Header is selected, select the category. Finance, Real Estate, Education Health etc, select which category your business falls into. If your business does not fall in any of the listed categories, select Others.
+
+**Step 4** 
+
+Create a Header name of 6 alphabets/numbers representing your company name. based on the type of header. 
+
+Headers for **Promotional messages** should be of **6 digits and based on business category**. For example, if your business comes under the first category of Banking/Insurance/Financial products/credit cards, then your Header should begin with 1. If you are in Real Estate Business then the Header will begin with the numeric digit 2 so on and so forth.
+
+Headers for **Others category** comprise of **6 alphabets and are case sensitive**. For example, the Header ABCDEF and abcdef will be considered two unique valid Headers.
+
+**Step 5** 
+
+Once a unique header name is created (it should not be taken up by any other business entity), it is submitted for verification. It may take take a couple of working days to approve. Once approved, Headers appear on your Approved Headers dashboard in the DLT portal. You can also view the rejected headers with reasons, which you can correct and submit for registration again.
+
+## 4. Add Consent Template in DLT
+
+Consent Template is required only for **Promotional and Service Explicit SMS. If your sms does not fall under this category, Skip this step.** 
+
+**Step 1** 
+
+Login to your registered DLT portal and select option  **Consent Registration**
+
+**Step 2**  
+
+Enter the **template name**, **brand name** and the **template content**
+
+**Template name**: You have to create a template name relevant to the message content type. Better to keep it short and precise. Avoid names like Template 1 and Template 2
+
+**Brand name**: Enter your business name related to the product or service. 
+
+**Template Content**: Enter the purpose of the message and not the actual message body. This field does not allow any variables. 
+
+Example : We would like to send sms to our registered clients regarding our product updates.
+
+**Step 3** 
+
+Once submitted it might take 3-7 working days to approve the consent template. Once approved you can see the details on the dlt dashboard itself.
+
+The Consent has to be authenticated by the customer via OTP. Consent Template has to be mapped with Content Template for Promotional & Service Explicit Category in DLT Platform.
+
+## 5. Add Content Template in DLT
+
+As per the new TRAI rules, it is mandatory for all business entities to register all SMS texts as content templates on the DLT portal and get approved before sending bulk sms. You have to enter the actual message body with <>{"{#var#}"}</> in place of variables.
+
+Content Templates can be added for all message types or routes that is Promotional, Transactions, Service Implicit and Service Explicit.
+
+You can select from all the previously approved Header Names and Consent Template Ids
+
+Example of content templates: Get upto <>{"{#var#}"}</> discount on our latest collection.
+
+<>{"{#var#}"}</> is the OTP for transaction of Rs. <>{"{#var#}"}</>. Please do not share it with anyone.
+
+Once all details are filled, it takes 3 -7 days to register and approve the content templates. Templates requested, rejected, registered all will be visible on the DLT platform.
+
+Once this step is done, now your business entity is ready to send bulk sms to your customers. 
+
+You have to add this DLT template id while sending sms through [Raven](https://www.raven.dev/).

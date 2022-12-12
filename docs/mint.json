@@ -101,6 +101,7 @@
         "sms/sending-sms",
         "sms/delivery-status",
         "sms/sms-template",
+        "sms/dlt-registration",
         {
           "group": "SMS Integrations",
           "pages": [
