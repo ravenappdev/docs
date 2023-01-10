@@ -14,96 +14,10 @@ Before setting up the SDK, please make sure you have followed the steps to [setu
 Run the following commands your project root directory.
 
 ```bash
-npm i @ravenapp/raven-inapp-react
+npm i @ravenapp/raven-web-react-sdk
 ```
 
-### Step 3. Initialize SDK
-
-Inorder to start using React SDK, intialize library and import InAppNotificationCenter and styles.
-
-```javascript
-import React from 'react'
-
-import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
-import '@ravenapp/raven-inapp-react/dist/index.css'
-
-useEffect(() => {
-    countService.intialize(
-      <appId>,
-      <userId>,
-      <signature>
-    )
-}, [])
-
-const App = () => {
-  return (
-    <InAppNotificationCenter
-      color="<color>"
-      indicatorType="<indicator_type>"
-      fontStyle="<fontStyle>"
-      displayStyle="<displayStyle>"
-      position="<position>"
-      onClickNotification="<callbackFunction_reference>"
-    />
-  )
-}
-
-export default App
-```
-
-| Attribute           | Purpose                                                                                                                                                                                                                                                                                                                              | Examples                                                                                                           |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| userId              | Unique identifier of the user opening the notification center                                                                                                                                                                                                                                                                        |  "john_08"                                                                                                         |
-| appId               | Raven App ID. Go to Raven dashboard > Settings > AppID                                                                                                                                                                                                                                                                               |  ddf001ae-035f-4414-8c72-6f71231e2205                                                                              |
-| signature           | Unique signature generated for the user as described [here](https://app.gitbook.com/o/fOW2cG82hufCVVoTWX7c/s/-MG-HQd2A2Z9XgtUEjJF/~/changes/ZHEZ9iwpjrSgRPltkzMp/in-app/integrations/raven#step-2.-generate-a-unique-signature-for-every-user)                                                                                       |                                                                                                                    |
-| onClickNotification | Method that handles notification click. Args: (clickAction, customData). ClickAction string and CustomData map will be provided in the template and passed to the handler. Use clickAction to identify what action to perform on click and customData to pass any additional data that might be useful to perfor the click action.   | `(clickAction, customData) => { if (clickAction === "OPEN_ORDER_PAGE") { open("/orders", customData["orderId"])}}` |
-| color               | This is your primary color. It will get applied to the buttons and other UI components in the inapp center                                                                                                                                                                                                                           | 'red', '#FF0000', 'rgb(255,0,0)' (only strings)                                                                    |
-| indicatorType       | This attribute accepts only two values i.e 'dot', 'count'. The 'dot' will show a dot on the bell icon whenever a new notification comes and the 'count' will show the count of new notifications.                                                                                                                                    | 'dot', 'count' (only strings)                                                                                      |
-| fontStyle           | Custom font family for the inapp center. Default will take your system font.                                                                                                                                                                                                                                                         | 'Times', 'Courier' etc (only strings)                                                                              |
-| displayStyle        | displayStyle can be either 'drawer' or 'bubble' or 'fullScreen'. Bubble displays the notification list inside a popover. Drawer displays the notification list as full height on the right or left side of the screen depending on the position value. FullScreen comes with no bell-icon and inherits height and width from parent. | 'drawer','bubble' and 'fullScreen' (only strings)                                                                  |
-| position            | If the displayStyle is 'drawer' then position accepts two values, i.e 'left' and 'right'. If the display style is 'bubble' then position accepts three values, i.e 'left', 'center' and 'right'.                                                                                                                                     | 'left', 'right', 'center' (only strings)                                                                           |
-
-- Do not forget to call deintialize method when user logs out otherwise user will receive notifications event after logging out. You can access the deintialize method by importing countService.
-- When display style is 'fullScreen', there will not be bell icon. Inorder to access new notification's count, import the countService and subscribe the count.
-- When display style is 'fullScreen', you can remove the header by passing header={false} to the InAppNotificationCenter component. In that case, you can access to the unread count, mark all read, reload data by importing countService.
-  - deintialize - countService.deintialize()
-  - mark all read - countService.markAllRead()
-  - reload data - countService.reloadData()
-  - update last seen - countService.updateLastSeen() (call this function when displayStyle is 'fullScreen' and header = {false} to update the last seen)
-
-```javascript
-import React from 'react'
-
-import { InAppNotificationCenter, countService } from '@ravenapp/raven-inapp-react'
-import '@ravenapp/raven-inapp-react/dist/index.css'
-
-useEffect(() => {
-    countService.intialize(
-      <appId>,
-      <userId>,
-      <signature>
-    )
-    countService.count.subscribe((res) => console.log(res))
-    countService.unread.subscribe((res) => console.log(res))
-}, [])
-
-const App = () => {
-  return (
-    <InAppNotificationCenter
-      color="<color>"
-      indicatorType="<indicator_type>"
-      fontStyle="<fontStyle>"
-      displayStyle="<displayStyle>"
-      position="<position>"
-      onClickNotification="<callbackFunction_reference>"
-    />
-  )
-}
-
-export default App
-```
-
-### Step 4. Generate a unique signature for every user
+### Step 3. Generate a unique signature for every user
 
 - To allow Raven to sync user and their push tokens, Raven needs a
   unique signature for every user. This can be done by generating a hash of the
@@ -134,3 +48,101 @@ private String hmacSha256Signature(String userId, String apiKey) {
 - For testing purposes, use the free
   [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
   Pass the text as the user identifier and the secret key as your Raven API key.
+
+### Step 4. Initialize Firebase & SDK
+
+- Initialize the SDK on your app launch:
+
+```javascript
+import { initFirebase, initRaven } from "@ravenapp/raven-web-react-sdk";
+
+initFirebase(FIREBASE_CONFIG, FIREBASE_VAPID_KEY);
+initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY);
+```
+
+- You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from Firebase console.
+- You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step.
+
+- Add the service worker to your public folder
+
+```javascript
+importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js");
+
+// Initialize the Firebase app in the service worker by passing in
+// your app's Firebase config object.
+// https://firebase.google.com/docs/web/setup#config-object
+
+const FIREBASE_CONFIG = {};
+
+firebase.initializeApp(FIREBASE_CONFIG);
+
+const messaging = firebase.messaging();
+
+const broadcast = new BroadcastChannel("display-notification");
+
+messaging.onBackgroundMessage((payload) => {
+  console.log("[messaging-sw.js] Received background message ", payload);
+  broadcast.postMessage({
+    type: "DELIVERED",
+    data: payload["data"],
+  });
+});
+
+function handleClick(event) {
+  event.notification.close();
+  broadcast.postMessage({
+    type: "CLICKED",
+    data: event.notification.data,
+    actions: event.notification.actions,
+    action: event.action,
+  });
+}
+
+self.addEventListener("notificationclick", handleClick);
+```
+
+### Step 5. Set user to Raven
+
+- Set the user with a unique user id when the user logins to your app.
+
+```javascript
+import { setUser } from "@ravenapp/raven-web-react-sdk";
+
+setUser("user_id");
+```
+
+### Step 6. Setup push notification and set token on Raven
+
+- This will prompt the user with the notification permission dialog. The method takes two arguments - onError & onTokenReceived.
+
+```javascript
+import { setupPushNotification } from "@ravenapp/raven-web-react-sdk";
+
+setupPushNotification(
+  () => console.log("Error setting up push"),
+  (token) => console.log("Got the token from raven: " + token)
+);
+```
+
+### Step 7. Handle notification clicks
+
+- Listen to the broadcast channel: 'click-notification'. The clickAction variable will have the action string which you can use to open a window or take any specific action
+
+```javascript
+useEffect(() => {
+  //Click handling
+  const broadcast = new BroadcastChannel("click-notification");
+  broadcast.onmessage = (event) => {
+    try {
+      if (event.data) {
+        let clickAction = event.data["click_action"];
+        //Take action here
+        console.log(clickAction);
+      }
+    } catch (err) {
+      console.log("Broadcast click-notification error: " + err);
+    }
+  };
+}, []);
+```
