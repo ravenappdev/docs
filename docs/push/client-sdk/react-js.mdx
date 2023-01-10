@@ -1,0 +1,148 @@
+---
+title: "React(Web) SDK"
+description: "Raven React SDK lets you receive and manage push notifications in react webapps. This only works when FCM integration is used to send notifications"
+---
+
+## Setup
+
+### Step 1. Setup FCM Integration
+
+Before setting up the SDK, please make sure you have followed the steps to [setup the FCM Integration](https://docs.ravenapp.dev/push/integrations/fcm) first.
+
+### Step 2. Install SDK
+
+Run the following commands your project root directory.
+
+```bash
+npm i @ravenapp/raven-web-react-sdk
+```
+
+### Step 3. Generate a unique signature for every user
+
+- To allow Raven to sync user and their push tokens, Raven needs a
+  unique signature for every user. This can be done by generating a hash of the
+  userId signed with the Raven API Key.
+- Since this signature requires Raven API key, it is highly recommended to
+  create a backend API that generates the hash and sends to the frontend.
+  Following example shows how to generate a **HMAC-SHA256** Signature (hash of
+  your userId signed with your Raven API Key) in Java -
+- Add this dependency to `pom.xml` for using **HmacUtils** to generate signature
+
+```md pom.xml
+<dependency>
+  <groupId>commons-codec</groupId>
+  <artifactId>commons-codec</artifactId>
+  <version>1.16</version>
+</dependency>
+```
+
+```java
+import org.apache.commons.codec.digest.HmacUtils;
+
+private String hmacSha256Signature(String userId, String apiKey) {
+     return (new HmacUtils("HmacSHA256", apiKey.getBytes()).hmacHex(userId));
+}
+```
+
+- You can generate the signature on login and pass to the SDK on initialization.
+- For testing purposes, use the free
+  [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
+  Pass the text as the user identifier and the secret key as your Raven API key.
+
+### Step 4. Initialize Firebase & SDK
+
+- Initialize the SDK on your app launch:
+
+```javascript
+import { initFirebase, initRaven } from "@ravenapp/raven-web-react-sdk";
+
+initFirebase(FIREBASE_CONFIG, FIREBASE_VAPID_KEY);
+initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY);
+```
+
+- You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from Firebase console.
+- You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step.
+
+- Add the service worker to your public folder
+
+```javascript
+importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js");
+
+// Initialize the Firebase app in the service worker by passing in
+// your app's Firebase config object.
+// https://firebase.google.com/docs/web/setup#config-object
+
+const FIREBASE_CONFIG = {};
+
+firebase.initializeApp(FIREBASE_CONFIG);
+
+const messaging = firebase.messaging();
+
+const broadcast = new BroadcastChannel("display-notification");
+
+messaging.onBackgroundMessage((payload) => {
+  console.log("[messaging-sw.js] Received background message ", payload);
+  broadcast.postMessage({
+    type: "DELIVERED",
+    data: payload["data"],
+  });
+});
+
+function handleClick(event) {
+  event.notification.close();
+  broadcast.postMessage({
+    type: "CLICKED",
+    data: event.notification.data,
+    actions: event.notification.actions,
+    action: event.action,
+  });
+}
+
+self.addEventListener("notificationclick", handleClick);
+```
+
+### Step 5. Set user to Raven
+
+- Set the user with a unique user id when the user logins to your app.
+
+```javascript
+import { setUser } from "@ravenapp/raven-web-react-sdk";
+
+setUser("user_id");
+```
+
+### Step 6. Setup push notification and set token on Raven
+
+- This will prompt the user with the notification permission dialog. The method takes two arguments - onError & onTokenReceived.
+
+```javascript
+import { setupPushNotification } from "@ravenapp/raven-web-react-sdk";
+
+setupPushNotification(
+  () => console.log("Error setting up push"),
+  (token) => console.log("Got the token from raven: " + token)
+);
+```
+
+### Step 7. Handle notification clicks
+
+- Listen to the broadcast channel: 'click-notification'. The clickAction variable will have the action string which you can use to open a window or take any specific action
+
+```javascript
+useEffect(() => {
+  //Click handling
+  const broadcast = new BroadcastChannel("click-notification");
+  broadcast.onmessage = (event) => {
+    try {
+      if (event.data) {
+        let clickAction = event.data["click_action"];
+        //Take action here
+        console.log(clickAction);
+      }
+    } catch (err) {
+      console.log("Broadcast click-notification error: " + err);
+    }
+  };
+}, []);
+```
