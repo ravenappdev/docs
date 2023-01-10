@@ -13,6 +13,7 @@
     "ultraDark": "#192C96"
   },
   "api": {
+    "baseUrl": "https://api.ravenapp.dev",
     "auth": {
       "method": "key",
       "name": "Authorization",
@@ -22,12 +23,12 @@
   "topbarLinks": [
     {
       "name": "Login",
-      "url": "https://console.ravenapp.dev/get-started"
+      "url": "https://console.raven.dev/get-started"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Access",
-    "url": "https://ravenapp.dev"
+    "url": "https://raven.dev"
   },
   "anchors": [
     {
@@ -38,7 +39,7 @@
     {
       "name": "Channels",
       "icon": "paper-plane",
-      "url": "https://ravenapp.dev/channels"
+      "url": "https://raven.dev/channels"
     },
     {
       "name": "Support",
@@ -156,7 +157,8 @@
             "push/client-sdk/ios",
             "push/client-sdk/web",
             "push/client-sdk/flutter",
-            "push/client-sdk/flutter-demo-app"
+            "push/client-sdk/flutter-demo-app",
+            "push/client-sdk/react-js"
           ]
         }
       ]
