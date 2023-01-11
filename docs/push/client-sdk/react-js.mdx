@@ -5,11 +5,7 @@ description: "Raven React SDK lets you receive and manage push notifications in 
 
 ## Setup
 
-### Step 1. Setup FCM Integration
-
-Before setting up the SDK, please make sure you have followed the steps to [setup the FCM Integration](https://docs.ravenapp.dev/push/integrations/fcm) first.
-
-### Step 2. Install SDK
+### Step 1. Install Raven SDK
 
 Run the following commands your project root directory.
 
@@ -17,7 +13,7 @@ Run the following commands your project root directory.
 npm i @ravenapp/raven-web-react-sdk
 ```
 
-### Step 3. Generate a unique signature for every user
+### Step 2. Generate a unique signature for every user
 
 - To allow Raven to sync user and their push tokens, Raven needs a
   unique signature for every user. This can be done by generating a hash of the
@@ -44,14 +40,14 @@ private String hmacSha256Signature(String userId, String apiKey) {
 }
 ```
 
-- You can generate the signature on login and pass to the SDK on initialization.
+- You can generate the signature on login and pass to the SDK on initialization as shown in the next step.
 - For testing purposes, use the free
   [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
   Pass the text as the user identifier and the secret key as your Raven API key.
 
-### Step 4. Initialize Firebase & SDK
+### Step 3. Initialize Firebase & Raven SDK
 
-- Initialize the SDK on your app launch:
+Initialize the SDK on your app launch:
 
 ```javascript
 import { initFirebase, initRaven } from "@ravenapp/raven-web-react-sdk";
@@ -63,7 +59,9 @@ initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY);
 - You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from Firebase console.
 - You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step.
 
-- Add the service worker to your public folder
+### Step 4. Add the service worker
+
+Add this service worker to your public folder and name it as `messaging-sw.js`
 
 ```javascript
 importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js");
@@ -104,7 +102,7 @@ self.addEventListener("notificationclick", handleClick);
 
 ### Step 5. Set user to Raven
 
-- Set the user with a unique user id when the user logins to your app.
+Set the user with a unique user id when the user logins to your app.
 
 ```javascript
 import { setUser } from "@ravenapp/raven-web-react-sdk";
@@ -114,7 +112,7 @@ setUser("user_id");
 
 ### Step 6. Setup push notification and set token on Raven
 
-- This will prompt the user with the notification permission dialog. The method takes two arguments - onError & onTokenReceived.
+This will prompt the user with the notification permission dialog. The method takes two arguments - onError & onTokenReceived.
 
 ```javascript
 import { setupPushNotification } from "@ravenapp/raven-web-react-sdk";
@@ -127,7 +125,7 @@ setupPushNotification(
 
 ### Step 7. Handle notification clicks
 
-- Listen to the broadcast channel: 'click-notification'. The clickAction variable will have the action string which you can use to open a window or take any specific action
+Listen to the broadcast channel: 'click-notification'. The clickAction variable will have the action string which you can use to open a window or take any specific action
 
 ```javascript
 useEffect(() => {
@@ -146,3 +144,8 @@ useEffect(() => {
   };
 }, []);
 ```
+
+<Check>
+  You are all set! Just fire Raven API and you should see your web push notification 👍 If you are
+  facing any issues, please email us on support@ravenapp.dev
+</Check>
