@@ -80,7 +80,6 @@
         "platform/overview",
         "platform/apps/apps",
         "platform/apps/environment",
-        "platform/apps/languages",
         "platform/integrations/integrations",
         "platform/integrations/integration-rule",
         "platform/events/events",

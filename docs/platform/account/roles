@@ -1,0 +1,48 @@
+---
+title: "Role-based Access Control"
+---
+
+Role based access control is available for all Raven customers. If you want to control user roles of the users at app-level, you need to upgrade to Raven’s Enterprise plan. 
+
+In our RBAC model, we provide a set of user roles that controls their
+
+1. Account permissions
+2. App permissions
+
+## User Roles (Account)
+
+An account role allows permissions for actions at Account level like invite members, edit account details, billing etc. An account has 2 roles :
+
+1. **Owner** - This role allows users to have complete control over the account and app permissions. 
+2. **Member** - This role allows only read permissions for actions at Account level. A member can be an admin/ editor/ viewer for multiple apps (discussed below)
+
+## User Roles (App)
+
+An app Role allows permissions for actions at App level like viewing/editing logs, metrics, event, providers and inviting members to that app.
+
+1. **Admin** - A user with Admin permissions in an app has complete control over the app and also can invite new members to that app. 
+2. **Editor** -  A user with Editor permissions in an app can edit events/ providers in an app but cannot invite members to that app. 
+3. **Viewer** - A user with Viewer permissions has access to only view data on that app. 
+
+## App Privacy Access
+
+An App can have public or private access. This helps you to control who can access the apps. 
+
+1. **Public**: This allows all the members of that account to access this app.
+2. **Private**: This allows only members invited to that app to access the app. 
+
+Private App is only present in Raven’s enterprise plan. With this feature, admins can add only relevant users in an app. For example - this allows account administrators to create multiple apps for each company’s department and allow only members of that dept to access the app.
+
+**Permissions Matrix**
+
+| Account level Role | App Level Role | Invite new members to account | Invite new members to app | Can edit App Invitations and App Members | Can edit Account Invitations and Account Members |
+| --- | --- | --- | --- | --- | --- |
+| Owner | Admin | ✅ | ✅ | ✅ | ✅ |
+| Member | Admin | ❌ | ✅ | ✅ | ❌ |
+| Member | Editor | ❌ | ❌ | ❌ | ❌ |
+| Member | Viewer | ❌ | ❌ | ❌ | ❌ |
+
+|  | Public Apps | Private Apps |
+| --- | --- | --- |
+| Enterprise | ✅ | ✅ |
+| Startup | ✅ | ❌ |
