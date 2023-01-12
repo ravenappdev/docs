@@ -78,6 +78,7 @@
       "group": "Platform",
       "pages": [
         "platform/overview",
+        "platform/account/roles",
         "platform/apps/apps",
         "platform/apps/environment",
         "platform/integrations/integrations",
