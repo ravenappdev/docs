@@ -13,55 +13,19 @@ Run the following commands your project root directory.
 npm i @ravenapp/raven-web-react-sdk
 ```
 
-### Step 2. Generate a unique signature for every user
+### Step 2. Initialize Firebase
 
-- To allow Raven to sync user and their push tokens, Raven needs a
-  unique signature for every user. This can be done by generating a hash of the
-  userId signed with the Raven API Key.
-- Since this signature requires Raven API key, it is highly recommended to
-  create a backend API that generates the hash and sends to the frontend.
-  Following example shows how to generate a **HMAC-SHA256** Signature (hash of
-  your userId signed with your Raven API Key) in Java -
-- Add this dependency to `pom.xml` for using **HmacUtils** to generate signature
-
-```md pom.xml
-<dependency>
-  <groupId>commons-codec</groupId>
-  <artifactId>commons-codec</artifactId>
-  <version>1.16</version>
-</dependency>
-```
-
-```java
-import org.apache.commons.codec.digest.HmacUtils;
-
-private String hmacSha256Signature(String userId, String apiKey) {
-     return (new HmacUtils("HmacSHA256", apiKey.getBytes()).hmacHex(userId));
-}
-```
-
-- You can generate the signature on login and pass to the SDK on initialization as shown in the next step.
-- For testing purposes, use the free
-  [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
-  Pass the text as the user identifier and the secret key as your Raven API key.
-
-### Step 3. Initialize Firebase & Raven SDK
-
-Initialize the SDK on your app launch:
+##### A. Initialize Firebase on App start/launch. You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from the Firebase console.
 
 ```javascript
-import { initFirebase, initRaven } from "@ravenapp/raven-web-react-sdk";
+import { initFirebase } from "@ravenapp/raven-web-react-sdk";
 
 initFirebase(FIREBASE_CONFIG, FIREBASE_VAPID_KEY);
-initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY);
 ```
 
-- You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from Firebase console.
-- You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step.
+### Step 3. Setup push notifications
 
-### Step 4. Add the service worker
-
-Add this service worker to your public folder and name it as `messaging-sw.js`
+1. Add the service worker to your public folder and name it as `messaging-sw.js`. You can place it under your own path in the public folder. Just replcae the FIREBASE_CONFIG object with the one retrieved from Firebase.
 
 ```javascript
 importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js");
@@ -100,32 +64,70 @@ function handleClick(event) {
 self.addEventListener("notificationclick", handleClick);
 ```
 
-### Step 5. Set user to Raven
+2. Request permission from user and retrieve token using the method `setupPushNotification()`. This method takes 3 arguments:
 
-Set the user with a unique user id when the user logins to your app.
-
-```javascript
-import { setUser } from "@ravenapp/raven-web-react-sdk";
-
-setUser("user_id");
-```
-
-### Step 6. Setup push notification and set token on Raven
-
-This will prompt the user with the notification permission dialog. The method takes two arguments - onError & onTokenReceived.
+- onError: Callback if there is an error while requesting permission or retrieving token
+- onTokenReceived(token): Callback once the token is retrieved. We pass the token if you want to store it on your end.
+- serviceWorkerPath: String argument which is the path of the service worker in the public folder
 
 ```javascript
 import { setupPushNotification } from "@ravenapp/raven-web-react-sdk";
 
 setupPushNotification(
   () => console.log("Error setting up push"),
-  (token) => console.log("Got the token from raven: " + token)
+  (token) => console.log("Got the token from raven: " + token),
+  process.env.PUBLIC_URL + "firebase"
 );
 ```
 
-### Step 7. Handle notification clicks
+### Step 4. Initialize Raven
 
-Listen to the broadcast channel: 'click-notification'. The clickAction variable will have the action string which you can use to open a window or take any specific action
+Raven will get initialized after user login.
+
+1. After login once you have the userId of the user, you will need to retrieve a unique signature for the user.
+
+- This is required to sync user and their push tokens on Raven. This can be done by generating a hash of the
+  userId signed with the Raven API Key.
+- Since this signature requires Raven API key, it is highly recommended to
+  create a backend API that generates the hash and sends to the frontend.
+- Following example shows how to generate a **HMAC-SHA256** Signature (hash of
+  your userId signed with your Raven API Key) in Java -
+  Add this dependency to `pom.xml` for using **HmacUtils** to generate signature
+
+```md pom.xml
+<dependency>
+  <groupId>commons-codec</groupId>
+  <artifactId>commons-codec</artifactId>
+  <version>1.16</version>
+</dependency>
+```
+
+```java
+import org.apache.commons.codec.digest.HmacUtils;
+
+private String hmacSha256Signature(String userId, String apiKey) {
+     return (new HmacUtils("HmacSHA256", apiKey.getBytes()).hmacHex(userId));
+}
+```
+
+- You can generate the signature on login and pass to the SDK on initialization as shown in the next step.
+- For testing purposes, use the free
+  [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
+  Pass the text as the user identifier and the secret key as your Raven API key.
+
+2. Initialize the SDK after login
+
+```javascript
+import { initRaven } from "@ravenapp/raven-web-react-sdk";
+
+initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY, "USER_ID");
+```
+
+- You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step. The third argument is the userId of the loggedin user.
+
+### Step 5. Handle notification clicks
+
+Listen to the broadcast channel: `click-notification`. The `clickAction` variable will have the action string which you can use to open a window or take any specific action
 
 ```javascript
 useEffect(() => {
