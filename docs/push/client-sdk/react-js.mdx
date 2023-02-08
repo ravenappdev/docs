@@ -7,7 +7,7 @@ description: "Raven React SDK lets you receive and manage push notifications in 
 
 ### Step 1. Install Raven SDK
 
-Run the following commands your project root directory.
+Run the following commands your project root directory. Latest version is 1.0.3
 
 ```bash
 npm i @ravenapp/raven-web-react-sdk
@@ -15,7 +15,8 @@ npm i @ravenapp/raven-web-react-sdk
 
 ### Step 2. Initialize Firebase
 
-##### A. Initialize Firebase on App start/launch. You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from the Firebase console.
+Firebase will get installed as part of Step 1 and you only need to initialize Firebase on App start/launch.
+You can get the FIREBASE_CONFIG object and FIREBASE_VAPID_KEY from the Firebase console.
 
 ```javascript
 import { initFirebase } from "@ravenapp/raven-web-react-sdk";
@@ -23,9 +24,10 @@ import { initFirebase } from "@ravenapp/raven-web-react-sdk";
 initFirebase(FIREBASE_CONFIG, FIREBASE_VAPID_KEY);
 ```
 
-### Step 3. Setup push notifications
+### Step 3. Setup Push notifications
 
-1. Add the service worker to your public folder and name it as `messaging-sw.js`. You can place it under your own path in the public folder. Just replcae the FIREBASE_CONFIG object with the one retrieved from Firebase.
+1. Add the service worker to your public folder and name it as `messaging-sw.js`. You can place it under your own path in the public folder.
+   Just replcae the FIREBASE_CONFIG object with the one retrieved from Firebase and RAVEN_APP_ID with your App Id on Raven console.
 
 ```javascript
 importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js");
@@ -35,61 +37,130 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.9/firebase-messaging.js");
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
 
-const FIREBASE_CONFIG = {};
+const FIREBASE_CONFIG = YOUR_FIREBASE_CONFIG_OBJECT;
+
+const RAVEN_APP_ID = YOUR_RAVEN_APP_ID;
 
 firebase.initializeApp(FIREBASE_CONFIG);
 
 const messaging = firebase.messaging();
 
-const broadcast = new BroadcastChannel("display-notification");
-
 messaging.onBackgroundMessage((payload) => {
-  console.log("[messaging-sw.js] Received background message ", payload);
-  broadcast.postMessage({
-    type: "DELIVERED",
-    data: payload["data"],
-  });
+  console.log("[messaging-sw.js] Received background message ");
+  onMessageReceived(payload);
 });
 
 function handleClick(event) {
   event.notification.close();
-  broadcast.postMessage({
-    type: "CLICKED",
-    data: event.notification.data,
-    actions: event.notification.actions,
-    action: event.action,
-  });
+  console.log("[messaging-sw.js] Clicked message");
+  onMessageClicked(event.notification);
 }
 
 self.addEventListener("notificationclick", handleClick);
+
+const broadcast = new BroadcastChannel("display-notification");
+broadcast.onmessage = (event) => {
+  try {
+    let payload = event.data;
+    if (payload && payload["type"] === "DELIVERED") {
+      onMessageReceived(payload);
+    }
+
+    if (payload && payload["type"] === "CLICKED") {
+      onMessageClicked(payload);
+    }
+  } catch (err) {
+    console.log("Broadcast display-notification error: " + err);
+  }
+};
+
+function updateStatus(notificationId, type) {
+  if (!notificationId || !type) {
+    return;
+  }
+
+  var BASE_URL = `https://api.ravenapp.dev/v1/apps/${RAVEN_APP_ID}`;
+  var SET_DELIVERY_STATUS = `${BASE_URL}/push/status`;
+
+  //get user api
+  fetch(SET_DELIVERY_STATUS, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      notification_id: notificationId,
+      type: type,
+      timestamp: Date.now(),
+      current_timestamp: Date.now(),
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTTP status " + response.status);
+      }
+    })
+    .then((data) => {
+      // console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function renderNotification(reg, payload) {
+  if (payload && payload["data"]) {
+    //form action array
+    var actions = [];
+    for (var i = 1; i <= 4; i++) {
+      if (payload["data"]["action" + i]) {
+        var action = payload["data"]["action" + i];
+        var title = payload["data"]["title" + i];
+        var icon = payload["data"]["icon" + i];
+        actions.push({ action: action, title: title, icon: icon });
+      }
+    }
+
+    const notificationTitle = payload["data"]["title"];
+    const notificationOptions = {
+      body: payload["data"]["body"],
+      icon: payload["data"]["icon"],
+      data: payload["data"],
+      image: payload["data"]["image"],
+      actions: actions,
+    };
+    reg.showNotification(notificationTitle, notificationOptions);
+  }
+}
+
+function onMessageReceived(payload) {
+  renderNotification(self.registration, payload);
+  setTimeout(() => {
+    updateStatus(payload["data"]["raven_notification_id"], "DELIVERED");
+  }, 2000);
+}
+
+function onMessageClicked(payload) {
+  const clickBroadcast = new BroadcastChannel("click-notification");
+  var action = payload["action"];
+  if (!action) {
+    action = payload["data"]["click_action"];
+  }
+  clickBroadcast.postMessage({
+    click_action: action,
+  });
+  setTimeout(() => {
+    updateStatus(payload["data"]["raven_notification_id"], "CLICKED");
+  }, 2000);
+}
 ```
 
-2. Request permission from user and retrieve token using the method `setupPushNotification()`. This method takes 3 arguments:
+### Step 4. <mark> Server Side: </mark> API that returns a unique signature for the user
 
-- onError: Callback if there is an error while requesting permission or retrieving token
-- onTokenReceived(token): Callback once the token is retrieved. We pass the token if you want to store it on your end.
-- serviceWorkerPath: String argument which is the path of the service worker in the public folder
+You will need an API on the server side that returns a unique signature for a user.
 
-```javascript
-import { setupPushNotification } from "@ravenapp/raven-web-react-sdk";
-
-setupPushNotification(
-  () => console.log("Error setting up push"),
-  (token) => console.log("Got the token from raven: " + token),
-  process.env.PUBLIC_URL + "firebase"
-);
-```
-
-### Step 4. Initialize Raven
-
-Raven will get initialized after user login.
-
-1. After login once you have the userId of the user, you will need to retrieve a unique signature for the user.
-
-- This is required to sync user and their push tokens on Raven. This can be done by generating a hash of the
-  userId signed with the Raven API Key.
-- Since this signature requires Raven API key, it is highly recommended to
-  create a backend API that generates the hash and sends to the frontend.
+- This is required to securely identify the user on Raven without exposing the Raven API Key on the client side.
+- The client requests from its server a hash of the userId and Raven API key. All subsequent requests from client to Raven will have this signature.
 - Following example shows how to generate a **HMAC-SHA256** Signature (hash of
   your userId signed with your Raven API Key) in Java -
   Add this dependency to `pom.xml` for using **HmacUtils** to generate signature
@@ -110,22 +181,44 @@ private String hmacSha256Signature(String userId, String apiKey) {
 }
 ```
 
-- You can generate the signature on login and pass to the SDK on initialization as shown in the next step.
 - For testing purposes, use the free
   [HMAC-SHA256 hash generator tool](https://www.devglan.com/online-tools/hmac-sha256-online).
   Pass the text as the user identifier and the secret key as your Raven API key.
 
-2. Initialize the SDK after login
+### Step 5. Initialize Raven
+
+#### 5.1 Before user logs in
+
+- You need to do this step if you want to send notifications to the user who has not logged in yet.
+  You will have to use Firebase topics to send notifications which is described in detail in the More section.
+
+- Now you can use the following method to initialize Raven before login.
 
 ```javascript
-import { initRaven } from "@ravenapp/raven-web-react-sdk";
+import { initRavenBeforeLogin } from "@ravenapp/raven-web-react-sdk";
 
-initRaven(RAVEN_APP_ID, RAVEN_SECRET_KEY, "USER_ID");
+initRavenBeforeLogin(RAVEN_APP_ID, tokenHash);
 ```
 
-- You can get RAVEN_APP_ID from Settings in Raven. RAVEN_SECRETY_KEY is the secret generated in the previous step. The third argument is the userId of the loggedin user.
+- You can get RAVEN_APP_ID from Settings in Raven. tokenHash is generated using the Firebase token.
+  Use the token from Raven SDK in Step 3.2 and generate a hash of the token with the API created in Step 4.
+  The idea is to use the Firebase token as a replacement for userId, till the user logs in.
 
-### Step 5. Handle notification clicks
+#### 5.2 After user logs in
+
+- Once the user logs in, you need to reinitialize Raven.
+
+- Now you can use the following method to initialize Raven before login.
+
+```javascript
+import { initRavenAfterLogin } from "@ravenapp/raven-web-react-sdk";
+
+initRavenAfterLogin(RAVEN_APP_ID, userIdHash, userId);
+```
+
+- You can get RAVEN_APP_ID from Settings in Raven. userIdHash is generated by creating a hash of userId using the API created in Step 4.
+
+### Step 6. Handle notification clicks
 
 Listen to the broadcast channel: `click-notification`. The `clickAction` variable will have the action string which you can use to open a window or take any specific action
 
@@ -146,6 +239,8 @@ useEffect(() => {
   };
 }, []);
 ```
+
+##
 
 <Check>
   You are all set! Just fire Raven API and you should see your web push notification 👍 If you are
