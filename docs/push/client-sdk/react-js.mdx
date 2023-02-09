@@ -190,7 +190,7 @@ private String hmacSha256Signature(String userId, String apiKey) {
 #### 5.1 Before user logs in
 
 - You need to do this step if you want to send notifications to the user who has not logged in yet.
-  You will have to use Firebase topics to send notifications which is described in detail in the More section.
+  You will have to use Firebase topics to send notifications which is described in detail in the Sending Messages section.
 
 - Now you can use the following method to initialize Raven before login.
 
@@ -240,7 +240,53 @@ useEffect(() => {
 }, []);
 ```
 
-##
+## Sending messages
+
+Follow the [Sending Push](/push/sending-push) doc to setup Firebase and create an event on the Raven console. Once done you can use Raven API to send push notifications.
+
+### 1. Sending 1:1 to a user
+
+To send a notification directly to a user you can pass either the registered fcm_tokens of the user or just pass the userId. Sending to userId will work if you are using Raven to manage the Firebase tokens.
+In this case, Raven SDK takes care of managing tokens and will send the notification to all the tokens registered for the userId.
+
+```bash
+curl --location --request POST 'https://api.ravenapp.dev/v1/apps/{APP_ID}/events/send' \
+--header 'Authorization: AuthKey {API_KEY}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "event" : {EVENT_NAME},
+    "user": {
+        "fcm_tokens": [{LIST_OF_TOKENS}]
+        "user_id": {USER_ID}
+    }
+}'
+```
+
+### 2. Sending to a group of users
+
+To send to a group of users, you can use Firebase Topics. In this case, you will have to register the user to a topic using Raven SDK. The SDK has two methods:
+
+```javascript
+import { subscribeFirebaseTopic, unsubscribeFirebaseTopic } from "@ravenapp/raven-web-react-sdk";
+
+subscribeFirebaseTopic(["TOPIC_NAME"]);
+unsubscribeFirebaseTopic(["TOPIC_NAME"]);
+```
+
+You can pass the list of topics to subscribe a user. Note that this can be done only once you have initialized Firebase, retrieved the Firebase token and initialized Raven.
+Once subscribed you can pass the fcm_topic in the Raven API -
+
+```bash
+curl --location --request POST 'https://api.ravenapp.dev/v1/apps/{APP_ID}/events/send' \
+--header 'Authorization: AuthKey {API_KEY}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "event" : {EVENT_NAME},
+    "user": {
+        "fcm_topic": {TOPIC_NAME}
+    }
+}'
+```
 
 <Check>
   You are all set! Just fire Raven API and you should see your web push notification 👍 If you are
